@@ -1,0 +1,62 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Expo prebuild (generate Xcode project)
+        run: npx expo prebuild --platform ios --clean
+
+      - name: Install CocoaPods
+        run: cd ios && pod install
+
+      - name: Archive with xcodebuild
+        run: |
+          xcodebuild archive \
+            -workspace ios/deutschb1.xcworkspace \
+            -scheme deutschb1 \
+            -configuration Release \
+            -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath $RUNNER_TEMP/build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package IPA artifact
+        run: |
+          mkdir -p $RUNNER_TEMP/ipa-output
+          cp $RUNNER_TEMP/build/*.ipa $RUNNER_TEMP/ipa-output/
+
+      - name: Upload IPA as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deutschb1-ios-ipa
+          path: ${{ runner.temp }}/ipa-output/*.ipa
+          retention-days: 30
