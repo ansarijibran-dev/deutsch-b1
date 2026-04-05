@@ -6,6 +6,9 @@ import {
   getWordById,
   searchWords,
   getWeakWords,
+  getAllThemes,
+  getWordCountByTheme,
+  getWordCountByType,
 } from '../../data/loader';
 
 // The loader module is mocked to use sample data in tests
@@ -60,5 +63,32 @@ describe('loader', () => {
     const weak = getWeakWords(['abfall_001', 'haus_001']);
     expect(weak).toHaveLength(2);
     expect(weak.map(w => w.id)).toContain('abfall_001');
+  });
+
+  test('getAllThemes returns unique sorted theme list', () => {
+    const themes = getAllThemes();
+    // sample data has: environment, work, travel, food, health, daily_life, other
+    expect(themes.length).toBeGreaterThan(0);
+    // should be sorted alphabetically
+    const sorted = [...themes].sort();
+    expect(themes).toEqual(sorted);
+    // should have no duplicates
+    expect(new Set(themes).size).toBe(themes.length);
+  });
+
+  test('getWordCountByTheme returns correct counts', () => {
+    const counts = getWordCountByTheme();
+    // sample data has 1 word in 'work' theme (arbeiten_001)
+    expect(counts['work']).toBe(1);
+    // sample data has 1 word in 'environment' theme (abfall_001)
+    expect(counts['environment']).toBe(1);
+  });
+
+  test('getWordCountByType returns correct counts', () => {
+    const counts = getWordCountByType();
+    // sample data has 3 nouns
+    expect(counts['noun']).toBe(3);
+    // sample data has 2 verbs
+    expect(counts['verb']).toBe(2);
   });
 });
