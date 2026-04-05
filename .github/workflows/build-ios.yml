@@ -43,7 +43,7 @@ jobs:
         run: |
           xcodebuild -exportArchive \
             -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
-            -exportOptionsPlist ExportOptions.plist \
+            -exportOptionsPlist $GITHUB_WORKSPACE/ExportOptions.plist \
             -exportPath $RUNNER_TEMP/build \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
