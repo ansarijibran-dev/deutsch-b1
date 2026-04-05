@@ -1,0 +1,184 @@
+[
+  {
+    "id": "abfall_001",
+    "german": "Abfall",
+    "article": "der",
+    "english": "rubbish / waste",
+    "wordType": "noun",
+    "plural": "die Abfälle",
+    "theme": "environment",
+    "sentences": {
+      "present":    { "de": "Der Abfall liegt auf der Straße.", "en": "The rubbish is on the street." },
+      "past":       { "de": "Der Abfall lag auf der Straße.", "en": "The rubbish was on the street." },
+      "future":     { "de": "Der Abfall wird auf der Straße liegen.", "en": "The rubbish will be on the street." },
+      "nominative": { "de": "Der Abfall ist ein Problem.", "en": "The rubbish is a problem." },
+      "accusative": { "de": "Wir müssen den Abfall wegwerfen.", "en": "We must throw away the rubbish." },
+      "dative":     { "de": "Er spricht über den Abfall.", "en": "He talks about the rubbish." }
+    }
+  },
+  {
+    "id": "arbeiten_001",
+    "german": "arbeiten",
+    "article": null,
+    "english": "to work",
+    "wordType": "verb",
+    "plural": null,
+    "theme": "work",
+    "verbForms": {
+      "present_3sg": "arbeitet",
+      "simple_past": "arbeitete",
+      "perfect": "hat gearbeitet",
+      "future": "wird arbeiten"
+    },
+    "sentences": {
+      "present": { "de": "Sie arbeitet jeden Tag von neun bis fünf.", "en": "She works every day from nine to five." },
+      "past":    { "de": "Er arbeitete gestern bis spät in die Nacht.", "en": "He worked until late last night." },
+      "future":  { "de": "Ich werde nächste Woche von zu Hause arbeiten.", "en": "I will work from home next week." },
+      "usage1":  { "de": "Wir arbeiten gut zusammen.", "en": "We work well together." },
+      "usage2":  { "de": "Er hat lange an diesem Projekt gearbeitet.", "en": "He has worked on this project for a long time." },
+      "usage3":  { "de": "Arbeitest du gern?", "en": "Do you enjoy working?" }
+    }
+  },
+  {
+    "id": "schnell_001",
+    "german": "schnell",
+    "article": null,
+    "english": "fast / quick",
+    "wordType": "adjective",
+    "plural": null,
+    "theme": "other",
+    "sentences": {
+      "present": { "de": "Das Auto ist sehr schnell.", "en": "The car is very fast." },
+      "past":    { "de": "Der Zug war schneller als erwartet.", "en": "The train was faster than expected." },
+      "future":  { "de": "Das neue Modell wird noch schneller sein.", "en": "The new model will be even faster." },
+      "usage1":  { "de": "Er läuft sehr schnell.", "en": "He runs very fast." },
+      "usage2":  { "de": "Bitte antworte schnell.", "en": "Please reply quickly." },
+      "usage3":  { "de": "Eine schnelle Entscheidung ist nötig.", "en": "A quick decision is needed." }
+    }
+  },
+  {
+    "id": "wegen_001",
+    "german": "wegen",
+    "article": null,
+    "english": "because of / due to",
+    "wordType": "preposition",
+    "plural": null,
+    "theme": "other",
+    "sentences": {
+      "present": { "de": "Wegen des Regens bleibe ich zu Hause.", "en": "Because of the rain I'm staying home." },
+      "past":    { "de": "Wegen der Baustelle war die Straße gesperrt.", "en": "Due to construction the road was closed." },
+      "future":  { "de": "Wegen des Sturms wird der Flug ausfallen.", "en": "The flight will be cancelled due to the storm." },
+      "usage1":  { "de": "Er kommt wegen dir.", "en": "He is coming because of you." },
+      "usage2":  { "de": "Wegen Krankheit fehlt sie heute.", "en": "She is absent today due to illness." },
+      "usage3":  { "de": "Wegen des Lärms kann ich nicht schlafen.", "en": "I can't sleep because of the noise." }
+    }
+  },
+  {
+    "id": "reise_001",
+    "german": "Reise",
+    "article": "die",
+    "english": "journey / trip",
+    "wordType": "noun",
+    "plural": "die Reisen",
+    "theme": "travel",
+    "sentences": {
+      "present":    { "de": "Die Reise dauert drei Stunden.", "en": "The journey takes three hours." },
+      "past":       { "de": "Die Reise war sehr angenehm.", "en": "The trip was very pleasant." },
+      "future":     { "de": "Die Reise wird zwei Wochen dauern.", "en": "The trip will last two weeks." },
+      "nominative": { "de": "Eine Reise nach Deutschland ist mein Traum.", "en": "A trip to Germany is my dream." },
+      "accusative": { "de": "Ich plane eine Reise nach Berlin.", "en": "I am planning a trip to Berlin." },
+      "dative":     { "de": "Ich erinnere mich gern an die Reise.", "en": "I like to remember the trip." }
+    }
+  },
+  {
+    "id": "kaufen_001",
+    "german": "kaufen",
+    "article": null,
+    "english": "to buy",
+    "wordType": "verb",
+    "plural": null,
+    "theme": "food",
+    "verbForms": {
+      "present_3sg": "kauft",
+      "simple_past": "kaufte",
+      "perfect": "hat gekauft",
+      "future": "wird kaufen"
+    },
+    "sentences": {
+      "present": { "de": "Er kauft jeden Morgen frisches Brot.", "en": "He buys fresh bread every morning." },
+      "past":    { "de": "Sie kaufte gestern neue Schuhe.", "en": "She bought new shoes yesterday." },
+      "future":  { "de": "Wir werden ein neues Auto kaufen.", "en": "We will buy a new car." },
+      "usage1":  { "de": "Wo kann ich hier Briefmarken kaufen?", "en": "Where can I buy stamps here?" },
+      "usage2":  { "de": "Ich habe das online gekauft.", "en": "I bought that online." },
+      "usage3":  { "de": "Das kann man nicht kaufen.", "en": "That cannot be bought." }
+    }
+  },
+  {
+    "id": "gesund_001",
+    "german": "gesund",
+    "article": null,
+    "english": "healthy",
+    "wordType": "adjective",
+    "plural": null,
+    "theme": "health",
+    "sentences": {
+      "present": { "de": "Obst und Gemüse sind gesund.", "en": "Fruit and vegetables are healthy." },
+      "past":    { "de": "Er war lange nicht gesund.", "en": "He was not healthy for a long time." },
+      "future":  { "de": "Mit Sport wirst du gesünder sein.", "en": "With exercise you will be healthier." },
+      "usage1":  { "de": "Bleib gesund!", "en": "Stay healthy!" },
+      "usage2":  { "de": "Ein gesundes Leben ist wichtig.", "en": "A healthy life is important." },
+      "usage3":  { "de": "Das Essen hier ist sehr gesund.", "en": "The food here is very healthy." }
+    }
+  },
+  {
+    "id": "haus_001",
+    "german": "Haus",
+    "article": "das",
+    "english": "house",
+    "wordType": "noun",
+    "plural": "die Häuser",
+    "theme": "daily_life",
+    "sentences": {
+      "present":    { "de": "Das Haus hat einen großen Garten.", "en": "The house has a large garden." },
+      "past":       { "de": "Das Haus war sehr alt.", "en": "The house was very old." },
+      "future":     { "de": "Das Haus wird renoviert werden.", "en": "The house will be renovated." },
+      "nominative": { "de": "Das Haus gehört meinen Eltern.", "en": "The house belongs to my parents." },
+      "accusative": { "de": "Wir kaufen das Haus nächstes Jahr.", "en": "We are buying the house next year." },
+      "dative":     { "de": "Sie wohnen in dem Haus seit zehn Jahren.", "en": "They have lived in the house for ten years." }
+    }
+  },
+  {
+    "id": "leider_001",
+    "german": "leider",
+    "article": null,
+    "english": "unfortunately",
+    "wordType": "adverb",
+    "plural": null,
+    "theme": "other",
+    "sentences": {
+      "present": { "de": "Leider kann ich heute nicht kommen.", "en": "Unfortunately I cannot come today." },
+      "past":    { "de": "Er war leider nicht zu Hause.", "en": "Unfortunately he was not at home." },
+      "future":  { "de": "Leider werde ich die Party verpassen.", "en": "Unfortunately I will miss the party." },
+      "usage1":  { "de": "Leider ist das Geschäft geschlossen.", "en": "Unfortunately the shop is closed." },
+      "usage2":  { "de": "Das ist leider nicht möglich.", "en": "That is unfortunately not possible." },
+      "usage3":  { "de": "Leider haben wir keine Zeit.", "en": "Unfortunately we have no time." }
+    }
+  },
+  {
+    "id": "und_001",
+    "german": "und",
+    "article": null,
+    "english": "and",
+    "wordType": "conjunction",
+    "plural": null,
+    "theme": "other",
+    "sentences": {
+      "present": { "de": "Ich trinke Kaffee und Tee.", "en": "I drink coffee and tea." },
+      "past":    { "de": "Er kam und ging schnell.", "en": "He came and left quickly." },
+      "future":  { "de": "Sie werden essen und trinken.", "en": "They will eat and drink." },
+      "usage1":  { "de": "Mama und Papa sind zu Hause.", "en": "Mum and dad are at home." },
+      "usage2":  { "de": "Lesen und Schreiben sind wichtig.", "en": "Reading and writing are important." },
+      "usage3":  { "de": "Heute und morgen bin ich frei.", "en": "Today and tomorrow I am free." }
+    }
+  }
+]
