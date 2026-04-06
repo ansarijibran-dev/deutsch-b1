@@ -1,18 +1,14 @@
 /**
- * Expo config plugin that patches the generated Podfile to ensure
- * RNScreens builds AFTER ReactCodegen by injecting a post_install hook.
+ * Expo config plugin: ensures RNScreens builds after ReactCodegen.
  *
- * Without this, Xcode parallelises pod target compilation and RNScreens
- * tries to import codegen-generated headers (RNSStackScreenComponentView.h)
- * before ReactCodegen has produced them, causing a fatal error.
+ * Injects into the EXISTING post_install block (CocoaPods only allows one).
  */
 const { withDangerousMod } = require('@expo/config-plugins');
 const path = require('path');
 const fs = require('fs');
 
-const POST_INSTALL_HOOK = `
-# Fix: ensure RNScreens compiles after ReactCodegen so generated headers exist
-post_install do |installer|
+const INJECTION = `
+  # Fix: ensure RNScreens compiles after ReactCodegen so codegen headers exist
   installer.pods_project.targets.each do |target|
     next unless target.name == 'RNScreens'
     codegen_target = installer.pods_project.targets.find { |t| t.name == 'ReactCodegen' }
@@ -20,9 +16,7 @@ post_install do |installer|
     dep = installer.pods_project.new(Xcodeproj::Project::Object::PBXTargetDependency)
     dep.target = codegen_target
     target.dependencies << dep
-    puts "[withRNScreensBuildFix] Added ReactCodegen dependency to RNScreens"
   end
-end
 `;
 
 module.exports = function withRNScreensBuildFix(config) {
@@ -31,10 +25,18 @@ module.exports = function withRNScreensBuildFix(config) {
     (config) => {
       const podfilePath = path.join(config.modRequest.platformProjectRoot, 'Podfile');
       let podfile = fs.readFileSync(podfilePath, 'utf8');
-      if (!podfile.includes('withRNScreensBuildFix')) {
-        podfile += POST_INSTALL_HOOK;
-        fs.writeFileSync(podfilePath, podfile);
+
+      if (podfile.includes('withRNScreensBuildFix')) {
+        return config; // already patched
       }
+
+      // Insert into the existing post_install block right after its opening line
+      podfile = podfile.replace(
+        /^(post_install do \|installer\|)/m,
+        `$1\n  # withRNScreensBuildFix\n${INJECTION}`
+      );
+
+      fs.writeFileSync(podfilePath, podfile);
       return config;
     },
   ]);
