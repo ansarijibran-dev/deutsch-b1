@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "deutschb1",
+    "newArchEnabled": false,
     "platforms": ["ios"],
     "ios": {
       "bundleIdentifier": "com.personal.deutschb1",
