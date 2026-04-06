@@ -1,6 +1,7 @@
 /**
  * Expo config plugin that patches the generated Podfile post_install block to:
- * 1. Set SWIFT_STRICT_CONCURRENCY=minimal on all pod targets (fixes Swift 6 errors in expo-modules-core)
+ * 1. Force SWIFT_VERSION=5.9 and disable strict concurrency on all pod targets
+ *    (fixes Swift 6 errors in expo-modules-core with Xcode 16)
  * 2. Make RNScreens depend on ReactCodegen (fixes missing RNSStackScreenComponentView.h)
  */
 const { withDangerousMod } = require('@expo/config-plugins');
@@ -9,14 +10,23 @@ const fs = require('fs');
 
 const INJECTION = `
   # withRNScreensBuildFix start
-  # 1. Suppress Swift 6 strict concurrency errors across all pod targets
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
+      # Force Swift 5.9 language mode (supports @MainActor, no Swift 6 strict concurrency)
+      swift_ver = config.build_settings['SWIFT_VERSION']
+      if swift_ver.nil? || swift_ver.to_f >= 5.9
+        config.build_settings['SWIFT_VERSION'] = '5.9'
+      end
       config.build_settings['SWIFT_STRICT_CONCURRENCY'] = 'minimal'
+      # Also pass the flag directly to the Swift compiler
+      flags = config.build_settings['OTHER_SWIFT_FLAGS'] || '$(inherited)'
+      unless flags.include?('-strict-concurrency')
+        config.build_settings['OTHER_SWIFT_FLAGS'] = flags + ' -strict-concurrency=minimal'
+      end
     end
   end
 
-  # 2. Ensure RNScreens builds after ReactCodegen so generated headers exist
+  # Ensure RNScreens builds after ReactCodegen so codegen headers exist
   installer.pods_project.targets.each do |target|
     next unless target.name == 'RNScreens'
     codegen_target = installer.pods_project.targets.find { |t| t.name == 'ReactCodegen' }
@@ -39,7 +49,6 @@ module.exports = function withRNScreensBuildFix(config) {
         return config; // already patched
       }
 
-      // Insert into the existing post_install block right after its opening line
       podfile = podfile.replace(
         /^(post_install do \|installer\|)/m,
         `$1\n${INJECTION}`
