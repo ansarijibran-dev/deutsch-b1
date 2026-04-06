@@ -52,11 +52,12 @@ jobs:
               content = f.read()
 
           patch = """
-            # Swift 6 fix: disable strict concurrency on all pod targets
+            # Swift 6 fix + deployment target fix for all pod targets
             installer.pods_project.targets.each do |target|
               target.build_configurations.each do |config|
                 config.build_settings['SWIFT_STRICT_CONCURRENCY'] = 'minimal'
                 config.build_settings['SWIFT_VERSION'] = '5.9'
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
               end
             end
             # RNScreens fix: ensure it builds after ReactCodegen
