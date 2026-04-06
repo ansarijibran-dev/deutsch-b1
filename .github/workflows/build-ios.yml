@@ -38,7 +38,6 @@ jobs:
             -scheme "DeutschB1" \
             -configuration Release \
             -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
-            -parallelizeTargets NO \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
