@@ -9,7 +9,8 @@
     "platforms": ["ios"],
     "ios": {
       "bundleIdentifier": "com.personal.deutschb1",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "deploymentTarget": "17.0"
     },
     "plugins": ["expo-router", "./plugins/withRNScreensBuildFix"]
   }
