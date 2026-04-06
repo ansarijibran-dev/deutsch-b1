@@ -30,6 +30,68 @@ jobs:
           rm -rf node_modules/react-native-screens/ios/gamma/split-view
           rm -rf node_modules/react-native-screens/ios/gamma/orientation
 
+      - name: Patch expo-router Toolbar files for iOS 26 API compatibility (Xcode 16 / iOS 18 SDK)
+        run: |
+          python3 - << 'PYEOF'
+          import re
+
+          # RouterToolbarHostView.swift — remove if #available(iOS 26.0, *) block that sets
+          # hidesSharedBackground / sharesBackground (iOS 26 SDK symbols)
+          path = 'node_modules/expo-router/ios/Toolbar/RouterToolbarHostView.swift'
+          with open(path) as f:
+              src = f.read()
+          src = re.sub(
+              r'\s*if #available\(iOS 26\.0, \*\) \{\s*if let hidesSharedBackground.*?sharesBackground = sharesBackground\s*\}\s*\}',
+              '',
+              src,
+              flags=re.DOTALL
+          )
+          with open(path, 'w') as f:
+              f.write(src)
+          print("Patched RouterToolbarHostView.swift")
+
+          # RouterToolbarItemView.swift — three iOS 26 blocks
+          path = 'node_modules/expo-router/ios/Toolbar/RouterToolbarItemView.swift'
+          with open(path) as f:
+              src = f.read()
+          # 1. searchBar guard calls searchBarPlacementBarButtonItem — replace that line only
+          src = src.replace(
+              'item = controller.navigationItem.searchBarPlacementBarButtonItem',
+              'currentBarButtonItem = nil\n        return'
+          )
+          # 2. applyCommonProperties hidesSharedBackground / sharesBackground block
+          src = re.sub(
+              r'\s*if #available\(iOS 26\.0, \*\) \{\s*item\.hidesSharedBackground.*?item\.sharesBackground.*?\}',
+              '',
+              src,
+              flags=re.DOTALL
+          )
+          # 3. badge block
+          src = re.sub(
+              r'\s*if #available\(iOS 26\.0, \*\) \{\s*if let badgeConfig.*?item\.badge = nil\s*\}\s*\}',
+              '',
+              src,
+              flags=re.DOTALL
+          )
+          with open(path, 'w') as f:
+              f.write(src)
+          print("Patched RouterToolbarItemView.swift")
+
+          # RouterToolbarModule.swift — .prominent case returns iOS 26-only .prominent style
+          path = 'node_modules/expo-router/ios/Toolbar/RouterToolbarModule.swift'
+          with open(path) as f:
+              src = f.read()
+          src = re.sub(
+              r'if #available\(iOS 26\.0, \*\) \{\s*return \.prominent\s*\} else \{\s*return \.done\s*\}',
+              'return .done',
+              src,
+              flags=re.DOTALL
+          )
+          with open(path, 'w') as f:
+              f.write(src)
+          print("Patched RouterToolbarModule.swift")
+          PYEOF
+
       - name: Patch expo-modules-core for @MainActor conformance compatibility
         run: |
           # Remove @MainActor from protocol conformance positions (unsupported in this Swift mode)
