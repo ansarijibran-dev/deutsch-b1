@@ -72599,5 +72599,1924 @@
         "en": "With the right ingredients every dish succeeds."
       }
     }
+  },
+  {
+    "id": "computer_2025",
+    "german": "Computer",
+    "article": "der",
+    "english": "computer",
+    "wordType": "noun",
+    "plural": "Computer",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Er arbeitet täglich am Computer.",
+        "en": "He works at the computer every day."
+      },
+      "past": {
+        "de": "Sie kaufte einen neuen Computer.",
+        "en": "She bought a new computer."
+      },
+      "future": {
+        "de": "Ich werde morgen den Computer reparieren.",
+        "en": "I will repair the computer tomorrow."
+      },
+      "usage1": {
+        "de": "Der Computer ist zu langsam.",
+        "en": "The computer is too slow."
+      },
+      "usage2": {
+        "de": "Kannst du mir mit dem Computer helfen?",
+        "en": "Can you help me with the computer?"
+      },
+      "usage3": {
+        "de": "Die Schüler lernen den Umgang mit dem Computer.",
+        "en": "The pupils learn how to use the computer."
+      }
+    }
+  },
+  {
+    "id": "internet_2026",
+    "german": "Internet",
+    "article": "das",
+    "english": "internet",
+    "wordType": "noun",
+    "plural": null,
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Wir suchen die Information im Internet.",
+        "en": "We look for the information on the internet."
+      },
+      "past": {
+        "de": "Früher gab es kein Internet.",
+        "en": "In the past there was no internet."
+      },
+      "future": {
+        "de": "Das Internet wird immer schneller werden.",
+        "en": "The internet will keep getting faster."
+      },
+      "usage1": {
+        "de": "Ich bestelle viel über das Internet.",
+        "en": "I order a lot via the internet."
+      },
+      "usage2": {
+        "de": "Hast du hier Zugang zum Internet?",
+        "en": "Do you have internet access here?"
+      },
+      "usage3": {
+        "de": "Das Internet verbindet Menschen auf der ganzen Welt.",
+        "en": "The internet connects people all over the world."
+      }
+    }
+  },
+  {
+    "id": "email_2027",
+    "german": "E-Mail",
+    "article": "die",
+    "english": "email",
+    "wordType": "noun",
+    "plural": "E-Mails",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Sie schreibt jeden Tag viele E-Mails.",
+        "en": "She writes many emails every day."
+      },
+      "past": {
+        "de": "Er schickte die Bewerbung per E-Mail.",
+        "en": "He sent the application by email."
+      },
+      "future": {
+        "de": "Ich werde dir die Dokumente per E-Mail schicken.",
+        "en": "I will send you the documents by email."
+      },
+      "usage1": {
+        "de": "Hast du meine E-Mail bekommen?",
+        "en": "Did you receive my email?"
+      },
+      "usage2": {
+        "de": "Bitte antworte auf diese E-Mail so schnell wie möglich.",
+        "en": "Please reply to this email as soon as possible."
+      },
+      "usage3": {
+        "de": "Die E-Mail-Adresse steht auf der Visitenkarte.",
+        "en": "The email address is on the business card."
+      }
+    }
+  },
+  {
+    "id": "app_2028",
+    "german": "App",
+    "article": "die",
+    "english": "app",
+    "wordType": "noun",
+    "plural": "Apps",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Diese App hilft mir beim Deutschlernen.",
+        "en": "This app helps me learn German."
+      },
+      "past": {
+        "de": "Er lud sich eine neue App herunter.",
+        "en": "He downloaded a new app."
+      },
+      "future": {
+        "de": "Ich werde eine bessere App suchen.",
+        "en": "I will look for a better app."
+      },
+      "usage1": {
+        "de": "Die App ist kostenlos erhältlich.",
+        "en": "The app is available for free."
+      },
+      "usage2": {
+        "de": "Welche Apps nutzt du am häufigsten?",
+        "en": "Which apps do you use most often?"
+      },
+      "usage3": {
+        "de": "Die App zeigt das Wetter für die nächsten Tage.",
+        "en": "The app shows the weather for the next few days."
+      }
+    }
+  },
+  {
+    "id": "passwort_2029",
+    "german": "Passwort",
+    "article": "das",
+    "english": "password",
+    "wordType": "noun",
+    "plural": "Passwörter",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Du musst ein sicheres Passwort wählen.",
+        "en": "You must choose a secure password."
+      },
+      "past": {
+        "de": "Sie vergaß ihr Passwort.",
+        "en": "She forgot her password."
+      },
+      "future": {
+        "de": "Ich werde mein Passwort ändern.",
+        "en": "I will change my password."
+      },
+      "usage1": {
+        "de": "Das Passwort ist falsch. Bitte versuche es erneut.",
+        "en": "The password is wrong. Please try again."
+      },
+      "usage2": {
+        "de": "Teile dein Passwort mit niemandem.",
+        "en": "Do not share your password with anyone."
+      },
+      "usage3": {
+        "de": "Ein gutes Passwort enthält Buchstaben und Zahlen.",
+        "en": "A good password contains letters and numbers."
+      }
+    }
+  },
+  {
+    "id": "website_2030",
+    "german": "Website",
+    "article": "die",
+    "english": "website",
+    "wordType": "noun",
+    "plural": "Websites",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Die Website der Schule hat alle Informationen.",
+        "en": "The school's website has all the information."
+      },
+      "past": {
+        "de": "Er baute eine neue Website für seine Firma.",
+        "en": "He built a new website for his company."
+      },
+      "future": {
+        "de": "Wir werden unsere Website bald aktualisieren.",
+        "en": "We will update our website soon."
+      },
+      "usage1": {
+        "de": "Besuche unsere Website für mehr Details.",
+        "en": "Visit our website for more details."
+      },
+      "usage2": {
+        "de": "Die Website ist gerade nicht erreichbar.",
+        "en": "The website is currently not accessible."
+      },
+      "usage3": {
+        "de": "Er hat die Adresse der Website aufgeschrieben.",
+        "en": "He wrote down the address of the website."
+      }
+    }
+  },
+  {
+    "id": "herunterladen_2031",
+    "german": "herunterladen",
+    "article": null,
+    "english": "to download",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "lädt herunter",
+      "simple_past": "lud herunter",
+      "perfect": "hat heruntergeladen",
+      "future": "wird herunterladen"
+    },
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Sie lädt die Datei vom Internet herunter.",
+        "en": "She is downloading the file from the internet."
+      },
+      "past": {
+        "de": "Er lud das Programm herunter.",
+        "en": "He downloaded the programme."
+      },
+      "future": {
+        "de": "Ich werde die App herunterladen.",
+        "en": "I will download the app."
+      },
+      "usage1": {
+        "de": "Kannst du mir die Datei herunterladen?",
+        "en": "Can you download the file for me?"
+      },
+      "usage2": {
+        "de": "Das Herunterladen dauert einige Minuten.",
+        "en": "Downloading takes a few minutes."
+      },
+      "usage3": {
+        "de": "Man kann Musik legal aus dem Internet herunterladen.",
+        "en": "You can legally download music from the internet."
+      }
+    }
+  },
+  {
+    "id": "hochladen_2032",
+    "german": "hochladen",
+    "article": null,
+    "english": "to upload",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "lädt hoch",
+      "simple_past": "lud hoch",
+      "perfect": "hat hochgeladen",
+      "future": "wird hochladen"
+    },
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Er lädt die Fotos ins Internet hoch.",
+        "en": "He is uploading the photos to the internet."
+      },
+      "past": {
+        "de": "Sie lud ihr Bewerbungsfoto hoch.",
+        "en": "She uploaded her application photo."
+      },
+      "future": {
+        "de": "Ich werde das Video morgen hochladen.",
+        "en": "I will upload the video tomorrow."
+      },
+      "usage1": {
+        "de": "Bitte lade das Dokument auf unsere Website hoch.",
+        "en": "Please upload the document to our website."
+      },
+      "usage2": {
+        "de": "Das Hochladen der Datei dauert lange.",
+        "en": "Uploading the file takes a long time."
+      },
+      "usage3": {
+        "de": "Sie lädt täglich neue Inhalte hoch.",
+        "en": "She uploads new content every day."
+      }
+    }
+  },
+  {
+    "id": "chatten_2033",
+    "german": "chatten",
+    "article": null,
+    "english": "to chat (online)",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "chattet",
+      "simple_past": "chattete",
+      "perfect": "hat gechattet",
+      "future": "wird chatten"
+    },
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Sie chattet gerne mit ihren Freunden.",
+        "en": "She likes chatting with her friends."
+      },
+      "past": {
+        "de": "Wir chatteten gestern Abend lange.",
+        "en": "We chatted for a long time last night."
+      },
+      "future": {
+        "de": "Ich werde dich morgen anrufen oder chatten.",
+        "en": "I will call you or chat tomorrow."
+      },
+      "usage1": {
+        "de": "Jugendliche chatten viel über das Smartphone.",
+        "en": "Young people chat a lot via smartphone."
+      },
+      "usage2": {
+        "de": "Man kann kostenlos über das Internet chatten.",
+        "en": "You can chat over the internet for free."
+      },
+      "usage3": {
+        "de": "Ich chatte lieber als zu telefonieren.",
+        "en": "I prefer chatting to calling."
+      }
+    }
+  },
+  {
+    "id": "online_2034",
+    "german": "online",
+    "article": null,
+    "english": "online",
+    "wordType": "adjective",
+    "theme": "technology",
+    "sentences": {
+      "present": {
+        "de": "Der Kurs ist online verfügbar.",
+        "en": "The course is available online."
+      },
+      "past": {
+        "de": "Früher kaufte sie alles im Geschäft, jetzt kauft sie online.",
+        "en": "She used to buy everything in the shop; now she buys online."
+      },
+      "future": {
+        "de": "Die Prüfung wird online stattfinden.",
+        "en": "The exam will take place online."
+      },
+      "usage1": {
+        "de": "Ich habe das Ticket online gebucht.",
+        "en": "I booked the ticket online."
+      },
+      "usage2": {
+        "de": "Das Restaurant hat einen Online-Tisch-Reservierungsservice.",
+        "en": "The restaurant has an online table reservation service."
+      },
+      "usage3": {
+        "de": "Bist du gerade online?",
+        "en": "Are you online right now?"
+      }
+    }
+  },
+  {
+    "id": "hund_2035",
+    "german": "Hund",
+    "article": "der",
+    "english": "dog",
+    "wordType": "noun",
+    "plural": "Hunde",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Der Hund bellt laut.",
+        "en": "The dog barks loudly."
+      },
+      "past": {
+        "de": "Als Kind hatte er einen kleinen Hund.",
+        "en": "As a child he had a small dog."
+      },
+      "future": {
+        "de": "Wir werden uns einen Hund kaufen.",
+        "en": "We will get a dog."
+      },
+      "usage1": {
+        "de": "Sie geht jeden Morgen mit dem Hund spazieren.",
+        "en": "She takes the dog for a walk every morning."
+      },
+      "usage2": {
+        "de": "Der Hund ist der beste Freund des Menschen.",
+        "en": "The dog is man's best friend."
+      },
+      "usage3": {
+        "de": "Vorsicht, bissiger Hund!",
+        "en": "Caution, dog bites!"
+      }
+    }
+  },
+  {
+    "id": "katze_2036",
+    "german": "Katze",
+    "article": "die",
+    "english": "cat",
+    "wordType": "noun",
+    "plural": "Katzen",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Die Katze schläft auf dem Sofa.",
+        "en": "The cat is sleeping on the sofa."
+      },
+      "past": {
+        "de": "Unsere Katze fing eine Maus.",
+        "en": "Our cat caught a mouse."
+      },
+      "future": {
+        "de": "Ich werde die Katze zum Tierarzt bringen.",
+        "en": "I will take the cat to the vet."
+      },
+      "usage1": {
+        "de": "Hast du eine Allergie gegen Katzen?",
+        "en": "Do you have an allergy to cats?"
+      },
+      "usage2": {
+        "de": "Die Katze miaut, wenn sie Hunger hat.",
+        "en": "The cat meows when it is hungry."
+      },
+      "usage3": {
+        "de": "Er streichelt liebevoll die Katze.",
+        "en": "He strokes the cat affectionately."
+      }
+    }
+  },
+  {
+    "id": "vogel_2037",
+    "german": "Vogel",
+    "article": "der",
+    "english": "bird",
+    "wordType": "noun",
+    "plural": "Vögel",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Der Vogel singt früh am Morgen.",
+        "en": "The bird sings early in the morning."
+      },
+      "past": {
+        "de": "Sie beobachtete einen bunten Vogel im Garten.",
+        "en": "She watched a colourful bird in the garden."
+      },
+      "future": {
+        "de": "Im Frühling werden die Vögel zurückkehren.",
+        "en": "In spring the birds will return."
+      },
+      "usage1": {
+        "de": "Der Vogel hat ein kleines Nest gebaut.",
+        "en": "The bird has built a small nest."
+      },
+      "usage2": {
+        "de": "Vögel können fliegen, aber nicht alle schwimmen.",
+        "en": "Birds can fly, but not all of them can swim."
+      },
+      "usage3": {
+        "de": "Welcher Vogel singt so schön?",
+        "en": "Which bird sings so beautifully?"
+      }
+    }
+  },
+  {
+    "id": "fisch_2038",
+    "german": "Fisch",
+    "article": "der",
+    "english": "fish",
+    "wordType": "noun",
+    "plural": "Fische",
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Sie isst zweimal pro Woche Fisch.",
+        "en": "She eats fish twice a week."
+      },
+      "past": {
+        "de": "Er fing drei Fische im See.",
+        "en": "He caught three fish in the lake."
+      },
+      "future": {
+        "de": "Ich werde heute Abend Fisch kochen.",
+        "en": "I will cook fish this evening."
+      },
+      "usage1": {
+        "de": "Fisch ist sehr gesund und reich an Vitaminen.",
+        "en": "Fish is very healthy and rich in vitamins."
+      },
+      "usage2": {
+        "de": "Frischer Fisch riecht nicht unangenehm.",
+        "en": "Fresh fish does not smell unpleasant."
+      },
+      "usage3": {
+        "de": "Im Restaurant bestellte er gegrillten Fisch.",
+        "en": "In the restaurant he ordered grilled fish."
+      }
+    }
+  },
+  {
+    "id": "pferd_2039",
+    "german": "Pferd",
+    "article": "das",
+    "english": "horse",
+    "wordType": "noun",
+    "plural": "Pferde",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Das Pferd läuft schnell über die Wiese.",
+        "en": "The horse runs fast across the meadow."
+      },
+      "past": {
+        "de": "Sie ritt jeden Sommer auf einem Pferd.",
+        "en": "She rode a horse every summer."
+      },
+      "future": {
+        "de": "Wir werden morgen Pferde reiten.",
+        "en": "We will go horse riding tomorrow."
+      },
+      "usage1": {
+        "de": "Das Pferd frisst Gras und Heu.",
+        "en": "The horse eats grass and hay."
+      },
+      "usage2": {
+        "de": "Er lernte als Kind reiten und liebt Pferde.",
+        "en": "He learnt to ride as a child and loves horses."
+      },
+      "usage3": {
+        "de": "Auf dem Bauernhof leben zwei Pferde.",
+        "en": "Two horses live on the farm."
+      }
+    }
+  },
+  {
+    "id": "bestellen_2040",
+    "german": "bestellen",
+    "article": null,
+    "english": "to order",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "bestellt",
+      "simple_past": "bestellte",
+      "perfect": "hat bestellt",
+      "future": "wird bestellen"
+    },
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Er bestellt immer das gleiche Gericht.",
+        "en": "He always orders the same dish."
+      },
+      "past": {
+        "de": "Sie bestellte eine Pizza und einen Salat.",
+        "en": "She ordered a pizza and a salad."
+      },
+      "future": {
+        "de": "Was wirst du bestellen?",
+        "en": "What will you order?"
+      },
+      "usage1": {
+        "de": "Ich möchte bitte bestellen.",
+        "en": "I would like to order, please."
+      },
+      "usage2": {
+        "de": "Wir haben das Essen online bestellt.",
+        "en": "We ordered the food online."
+      },
+      "usage3": {
+        "de": "Hat jemand schon bestellt?",
+        "en": "Has someone already ordered?"
+      }
+    }
+  },
+  {
+    "id": "abendessen_2041",
+    "german": "Abendessen",
+    "article": "das",
+    "english": "dinner, evening meal",
+    "wordType": "noun",
+    "plural": "Abendessen",
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Das Abendessen ist um 19 Uhr fertig.",
+        "en": "Dinner is ready at seven o'clock."
+      },
+      "past": {
+        "de": "Wir aßen das Abendessen gemeinsam.",
+        "en": "We had dinner together."
+      },
+      "future": {
+        "de": "Was gibt es heute zum Abendessen?",
+        "en": "What is there for dinner today?"
+      },
+      "usage1": {
+        "de": "Zum Abendessen kochte sie Suppe.",
+        "en": "She made soup for dinner."
+      },
+      "usage2": {
+        "de": "Er kommt erst nach dem Abendessen nach Hause.",
+        "en": "He will not come home until after dinner."
+      },
+      "usage3": {
+        "de": "Das Abendessen ist die wichtigste Mahlzeit für unsere Familie.",
+        "en": "Dinner is the most important meal for our family."
+      }
+    }
+  },
+  {
+    "id": "mittagessen_2042",
+    "german": "Mittagessen",
+    "article": "das",
+    "english": "lunch",
+    "wordType": "noun",
+    "plural": "Mittagessen",
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Das Mittagessen in der Kantine kostet fünf Euro.",
+        "en": "Lunch in the canteen costs five euros."
+      },
+      "past": {
+        "de": "Sie aß das Mittagessen im Büro.",
+        "en": "She had lunch in the office."
+      },
+      "future": {
+        "de": "Ich werde das Mittagessen mitbringen.",
+        "en": "I will bring lunch with me."
+      },
+      "usage1": {
+        "de": "Haben Sie Zeit für ein gemeinsames Mittagessen?",
+        "en": "Do you have time for lunch together?"
+      },
+      "usage2": {
+        "de": "Er macht immer eine halbe Stunde Pause für das Mittagessen.",
+        "en": "He always takes half an hour break for lunch."
+      },
+      "usage3": {
+        "de": "Zum Mittagessen gibt es heute Suppe und Salat.",
+        "en": "Today there is soup and salad for lunch."
+      }
+    }
+  },
+  {
+    "id": "joghurt_2043",
+    "german": "Joghurt",
+    "article": "der",
+    "english": "yoghurt",
+    "wordType": "noun",
+    "plural": "Joghurts",
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Sie isst jeden Morgen einen Joghurt.",
+        "en": "She eats a yoghurt every morning."
+      },
+      "past": {
+        "de": "Er kaufte Joghurt und Obst.",
+        "en": "He bought yoghurt and fruit."
+      },
+      "future": {
+        "de": "Ich werde Joghurt für das Frühstück kaufen.",
+        "en": "I will buy yoghurt for breakfast."
+      },
+      "usage1": {
+        "de": "Naturjoghurt ist sehr gesund.",
+        "en": "Natural yoghurt is very healthy."
+      },
+      "usage2": {
+        "de": "Dieser Joghurt schmeckt nach Erdbeere.",
+        "en": "This yoghurt tastes of strawberry."
+      },
+      "usage3": {
+        "de": "Mit Früchten und Joghurt macht man ein leckeres Dessert.",
+        "en": "You can make a delicious dessert with fruit and yoghurt."
+      }
+    }
+  },
+  {
+    "id": "backen_2044",
+    "german": "backen",
+    "article": null,
+    "english": "to bake",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "backt",
+      "simple_past": "backte",
+      "perfect": "hat gebacken",
+      "future": "wird backen"
+    },
+    "theme": "food",
+    "sentences": {
+      "present": {
+        "de": "Sie backt jeden Sonntag einen Kuchen.",
+        "en": "She bakes a cake every Sunday."
+      },
+      "past": {
+        "de": "Er backte Brot für die Familie.",
+        "en": "He baked bread for the family."
+      },
+      "future": {
+        "de": "Ich werde für die Party Plätzchen backen.",
+        "en": "I will bake biscuits for the party."
+      },
+      "usage1": {
+        "de": "Kannst du gut backen?",
+        "en": "Can you bake well?"
+      },
+      "usage2": {
+        "de": "Das Brot backt im Ofen bei 200 Grad.",
+        "en": "The bread is baking in the oven at 200 degrees."
+      },
+      "usage3": {
+        "de": "Zu Weihnachten backen wir immer Lebkuchen.",
+        "en": "At Christmas we always bake gingerbread."
+      }
+    }
+  },
+  {
+    "id": "staat_2045",
+    "german": "Staat",
+    "article": "der",
+    "english": "state, country",
+    "wordType": "noun",
+    "plural": "Staaten",
+    "theme": "society",
+    "sentences": {
+      "present": {
+        "de": "Der Staat ist für die Sicherheit der Bürger zuständig.",
+        "en": "The state is responsible for the safety of its citizens."
+      },
+      "past": {
+        "de": "Der Staat investierte viel in das Bildungssystem.",
+        "en": "The state invested a lot in the education system."
+      },
+      "future": {
+        "de": "Der Staat wird die Steuern erhöhen.",
+        "en": "The state will raise taxes."
+      },
+      "usage1": {
+        "de": "In einem demokratischen Staat haben alle Bürger gleiche Rechte.",
+        "en": "In a democratic state all citizens have equal rights."
+      },
+      "usage2": {
+        "de": "Der Staat unterstützt Familien mit Kindern.",
+        "en": "The state supports families with children."
+      },
+      "usage3": {
+        "de": "Europa besteht aus vielen verschiedenen Staaten.",
+        "en": "Europe consists of many different states."
+      }
+    }
+  },
+  {
+    "id": "demokratie_2046",
+    "german": "Demokratie",
+    "article": "die",
+    "english": "democracy",
+    "wordType": "noun",
+    "plural": "Demokratien",
+    "theme": "society",
+    "sentences": {
+      "present": {
+        "de": "In einer Demokratie wählen die Bürger ihre Vertreter.",
+        "en": "In a democracy citizens elect their representatives."
+      },
+      "past": {
+        "de": "Die Demokratie wurde nach dem Krieg wieder eingeführt.",
+        "en": "Democracy was reintroduced after the war."
+      },
+      "future": {
+        "de": "Wir müssen die Demokratie schützen.",
+        "en": "We must protect democracy."
+      },
+      "usage1": {
+        "de": "Demokratie bedeutet, dass jeder eine Stimme hat.",
+        "en": "Democracy means that everyone has a voice."
+      },
+      "usage2": {
+        "de": "In einer Demokratie ist Meinungsfreiheit ein Grundrecht.",
+        "en": "In a democracy freedom of speech is a fundamental right."
+      },
+      "usage3": {
+        "de": "Deutschland ist eine parlamentarische Demokratie.",
+        "en": "Germany is a parliamentary democracy."
+      }
+    }
+  },
+  {
+    "id": "parlament_2047",
+    "german": "Parlament",
+    "article": "das",
+    "english": "parliament",
+    "wordType": "noun",
+    "plural": "Parlamente",
+    "theme": "society",
+    "sentences": {
+      "present": {
+        "de": "Das Parlament diskutiert das neue Gesetz.",
+        "en": "Parliament is debating the new law."
+      },
+      "past": {
+        "de": "Das Parlament verabschiedete die Reform.",
+        "en": "Parliament passed the reform."
+      },
+      "future": {
+        "de": "Das Parlament wird über den Haushalt abstimmen.",
+        "en": "Parliament will vote on the budget."
+      },
+      "usage1": {
+        "de": "Die Abgeordneten treffen sich im Parlament.",
+        "en": "The members of parliament meet in parliament."
+      },
+      "usage2": {
+        "de": "Das Parlament vertritt die Interessen der Bevölkerung.",
+        "en": "Parliament represents the interests of the population."
+      },
+      "usage3": {
+        "de": "Wann tagt das Parlament das nächste Mal?",
+        "en": "When does parliament next meet?"
+      }
+    }
+  },
+  {
+    "id": "partei_2048",
+    "german": "Partei",
+    "article": "die",
+    "english": "political party",
+    "wordType": "noun",
+    "plural": "Parteien",
+    "theme": "society",
+    "sentences": {
+      "present": {
+        "de": "Sie ist Mitglied einer politischen Partei.",
+        "en": "She is a member of a political party."
+      },
+      "past": {
+        "de": "Er trat der Partei vor zehn Jahren bei.",
+        "en": "He joined the party ten years ago."
+      },
+      "future": {
+        "de": "Welche Partei wirst du wählen?",
+        "en": "Which party will you vote for?"
+      },
+      "usage1": {
+        "de": "Bei der Wahl traten fünf Parteien an.",
+        "en": "Five parties stood in the election."
+      },
+      "usage2": {
+        "de": "Die Partei hat ihr Programm vorgestellt.",
+        "en": "The party has presented its programme."
+      },
+      "usage3": {
+        "de": "Über Politik und Parteien lässt sich gut diskutieren.",
+        "en": "Politics and parties are good topics for discussion."
+      }
+    }
+  },
+  {
+    "id": "gymnasium_2049",
+    "german": "Gymnasium",
+    "article": "das",
+    "english": "grammar school, high school",
+    "wordType": "noun",
+    "plural": "Gymnasien",
+    "theme": "education",
+    "sentences": {
+      "present": {
+        "de": "Sie besucht das Gymnasium in der Stadtmitte.",
+        "en": "She attends the grammar school in the city centre."
+      },
+      "past": {
+        "de": "Er machte sein Abitur am Gymnasium.",
+        "en": "He did his Abitur at the grammar school."
+      },
+      "future": {
+        "de": "Nach der Grundschule wechselt sie ans Gymnasium.",
+        "en": "After primary school she will move to grammar school."
+      },
+      "usage1": {
+        "de": "Am Gymnasium kann man das Abitur machen.",
+        "en": "At grammar school you can take the Abitur."
+      },
+      "usage2": {
+        "de": "Das Gymnasium hat einen guten Ruf.",
+        "en": "The grammar school has a good reputation."
+      },
+      "usage3": {
+        "de": "In Deutschland gibt es verschiedene Schultypen, zum Beispiel das Gymnasium.",
+        "en": "In Germany there are different types of school, for example the grammar school."
+      }
+    }
+  },
+  {
+    "id": "grundschule_2050",
+    "german": "Grundschule",
+    "article": "die",
+    "english": "primary school",
+    "wordType": "noun",
+    "plural": "Grundschulen",
+    "theme": "education",
+    "sentences": {
+      "present": {
+        "de": "Die Kinder gehen in die Grundschule.",
+        "en": "The children go to primary school."
+      },
+      "past": {
+        "de": "Er lernte Lesen und Schreiben in der Grundschule.",
+        "en": "He learnt to read and write at primary school."
+      },
+      "future": {
+        "de": "Sie wird nächstes Jahr in die Grundschule kommen.",
+        "en": "She will start primary school next year."
+      },
+      "usage1": {
+        "de": "Die Grundschule dauert in Deutschland vier Jahre.",
+        "en": "Primary school lasts four years in Germany."
+      },
+      "usage2": {
+        "de": "In der Grundschule lernt man die Grundlagen.",
+        "en": "In primary school you learn the basics."
+      },
+      "usage3": {
+        "de": "Nach der Grundschule wechseln Kinder in eine weiterführende Schule.",
+        "en": "After primary school children move to a secondary school."
+      }
+    }
+  },
+  {
+    "id": "realschule_2051",
+    "german": "Realschule",
+    "article": "die",
+    "english": "secondary school (middle level)",
+    "wordType": "noun",
+    "plural": "Realschulen",
+    "theme": "education",
+    "sentences": {
+      "present": {
+        "de": "Er geht auf die Realschule.",
+        "en": "He attends secondary school."
+      },
+      "past": {
+        "de": "Sie machte ihren Abschluss an der Realschule.",
+        "en": "She got her leaving certificate from secondary school."
+      },
+      "future": {
+        "de": "Nach der Realschule möchte er eine Ausbildung machen.",
+        "en": "After secondary school he wants to do an apprenticeship."
+      },
+      "usage1": {
+        "de": "Die Realschule ist zwischen Hauptschule und Gymnasium.",
+        "en": "The Realschule is between the Hauptschule and the Gymnasium."
+      },
+      "usage2": {
+        "de": "Mit dem Realschulabschluss kann man viele Ausbildungen beginnen.",
+        "en": "With a Realschule certificate you can start many apprenticeships."
+      },
+      "usage3": {
+        "de": "In der Realschule lernt man praktische und theoretische Fächer.",
+        "en": "In the Realschule you learn practical and theoretical subjects."
+      }
+    }
+  },
+  {
+    "id": "grossvater_2052",
+    "german": "Großvater",
+    "article": "der",
+    "english": "grandfather",
+    "wordType": "noun",
+    "plural": "Großväter",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Mein Großvater erzählt gerne Geschichten.",
+        "en": "My grandfather likes to tell stories."
+      },
+      "past": {
+        "de": "Ihr Großvater war Bauer.",
+        "en": "Her grandfather was a farmer."
+      },
+      "future": {
+        "de": "Wir werden den Großvater am Wochenende besuchen.",
+        "en": "We will visit grandfather at the weekend."
+      },
+      "usage1": {
+        "de": "Der Großvater spielt mit den Enkeln.",
+        "en": "The grandfather plays with the grandchildren."
+      },
+      "usage2": {
+        "de": "Mein Großvater wurde 85 Jahre alt.",
+        "en": "My grandfather lived to be 85 years old."
+      },
+      "usage3": {
+        "de": "Sie sieht ihrem Großvater sehr ähnlich.",
+        "en": "She looks very much like her grandfather."
+      }
+    }
+  },
+  {
+    "id": "grossmutter_2053",
+    "german": "Großmutter",
+    "article": "die",
+    "english": "grandmother",
+    "wordType": "noun",
+    "plural": "Großmütter",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Die Großmutter backt den besten Kuchen.",
+        "en": "The grandmother bakes the best cake."
+      },
+      "past": {
+        "de": "Seine Großmutter lebte auf dem Land.",
+        "en": "His grandmother lived in the countryside."
+      },
+      "future": {
+        "de": "Ich werde die Großmutter zum Arzt begleiten.",
+        "en": "I will accompany my grandmother to the doctor."
+      },
+      "usage1": {
+        "de": "Die Großmutter passt auf die Kinder auf.",
+        "en": "The grandmother looks after the children."
+      },
+      "usage2": {
+        "de": "Meine Großmutter ist 80 Jahre alt und noch sehr fit.",
+        "en": "My grandmother is 80 years old and still very fit."
+      },
+      "usage3": {
+        "de": "Sie rief ihre Großmutter jeden Sonntag an.",
+        "en": "She called her grandmother every Sunday."
+      }
+    }
+  },
+  {
+    "id": "gesund_2054",
+    "german": "gesund",
+    "article": null,
+    "english": "healthy",
+    "wordType": "adjective",
+    "theme": "health",
+    "sentences": {
+      "present": {
+        "de": "Er lebt sehr gesund und treibt viel Sport.",
+        "en": "He lives very healthily and does a lot of sport."
+      },
+      "past": {
+        "de": "Als Kind war sie immer gesund.",
+        "en": "As a child she was always healthy."
+      },
+      "future": {
+        "de": "Ich möchte gesünder essen.",
+        "en": "I want to eat more healthily."
+      },
+      "usage1": {
+        "de": "Frisches Obst und Gemüse ist gesund.",
+        "en": "Fresh fruit and vegetables are healthy."
+      },
+      "usage2": {
+        "de": "Bist du wieder gesund?",
+        "en": "Are you well again?"
+      },
+      "usage3": {
+        "de": "Ein gesunder Lebensstil verlängert das Leben.",
+        "en": "A healthy lifestyle extends life."
+      }
+    }
+  },
+  {
+    "id": "krank_2055",
+    "german": "krank",
+    "article": null,
+    "english": "ill, sick",
+    "wordType": "adjective",
+    "theme": "health",
+    "sentences": {
+      "present": {
+        "de": "Sie ist krank und bleibt zu Hause.",
+        "en": "She is ill and is staying at home."
+      },
+      "past": {
+        "de": "Er war letzte Woche krank.",
+        "en": "He was ill last week."
+      },
+      "future": {
+        "de": "Ich hoffe, du wirst bald nicht mehr krank sein.",
+        "en": "I hope you will not be ill much longer."
+      },
+      "usage1": {
+        "de": "Er meldete sich krank und ging nicht zur Arbeit.",
+        "en": "He called in sick and did not go to work."
+      },
+      "usage2": {
+        "de": "Das kranke Kind schläft viel.",
+        "en": "The sick child sleeps a lot."
+      },
+      "usage3": {
+        "de": "Wenn man krank ist, sollte man viel trinken.",
+        "en": "When you are ill you should drink a lot."
+      }
+    }
+  },
+  {
+    "id": "jung_2056",
+    "german": "jung",
+    "article": null,
+    "english": "young",
+    "wordType": "adjective",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Die junge Frau studiert Medizin.",
+        "en": "The young woman studies medicine."
+      },
+      "past": {
+        "de": "Als er jung war, reiste er viel.",
+        "en": "When he was young he travelled a lot."
+      },
+      "future": {
+        "de": "Die junge Generation wird die Welt verändern.",
+        "en": "The young generation will change the world."
+      },
+      "usage1": {
+        "de": "Sie ist zwar jung, aber sehr erfahren.",
+        "en": "She may be young but she is very experienced."
+      },
+      "usage2": {
+        "de": "Wie jung bist du?",
+        "en": "How young are you?"
+      },
+      "usage3": {
+        "de": "Jung und Alt feierten gemeinsam.",
+        "en": "Young and old celebrated together."
+      }
+    }
+  },
+  {
+    "id": "alt_2057",
+    "german": "alt",
+    "article": null,
+    "english": "old",
+    "wordType": "adjective",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Das alte Gebäude steht seit 200 Jahren.",
+        "en": "The old building has been standing for 200 years."
+      },
+      "past": {
+        "de": "Er war schon alt, als sie ihn kennenlernte.",
+        "en": "He was already old when she met him."
+      },
+      "future": {
+        "de": "Ich möchte gesund alt werden.",
+        "en": "I want to grow old healthily."
+      },
+      "usage1": {
+        "de": "Wie alt bist du?",
+        "en": "How old are you?"
+      },
+      "usage2": {
+        "de": "Das ist ein altes Problem.",
+        "en": "That is an old problem."
+      },
+      "usage3": {
+        "de": "Alt und Jung haben verschiedene Interessen.",
+        "en": "Old and young have different interests."
+      }
+    }
+  },
+  {
+    "id": "schoen_2058",
+    "german": "schön",
+    "article": null,
+    "english": "beautiful, nice",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Das Wetter ist heute sehr schön.",
+        "en": "The weather is very nice today."
+      },
+      "past": {
+        "de": "Es war ein schöner Tag am Meer.",
+        "en": "It was a beautiful day at the sea."
+      },
+      "future": {
+        "de": "Das wird ein schönes Fest werden.",
+        "en": "It will be a lovely celebration."
+      },
+      "usage1": {
+        "de": "Wie schön, dich zu sehen!",
+        "en": "How lovely to see you!"
+      },
+      "usage2": {
+        "de": "Das Kleid ist wirklich schön.",
+        "en": "The dress is really beautiful."
+      },
+      "usage3": {
+        "de": "Schön, dass du gekommen bist.",
+        "en": "It is great that you came."
+      }
+    }
+  },
+  {
+    "id": "wichtig_2059",
+    "german": "wichtig",
+    "article": null,
+    "english": "important",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Es ist wichtig, regelmäßig Sport zu treiben.",
+        "en": "It is important to exercise regularly."
+      },
+      "past": {
+        "de": "Das war eine wichtige Entscheidung.",
+        "en": "That was an important decision."
+      },
+      "future": {
+        "de": "Das wird eine wichtige Sitzung sein.",
+        "en": "That will be an important meeting."
+      },
+      "usage1": {
+        "de": "Gesundheit ist das Wichtigste.",
+        "en": "Health is the most important thing."
+      },
+      "usage2": {
+        "de": "Mir ist Familie sehr wichtig.",
+        "en": "Family is very important to me."
+      },
+      "usage3": {
+        "de": "Bitte vergiss nicht – das ist wirklich wichtig!",
+        "en": "Please do not forget – that is really important!"
+      }
+    }
+  },
+  {
+    "id": "muede_2060",
+    "german": "müde",
+    "article": null,
+    "english": "tired",
+    "wordType": "adjective",
+    "theme": "health",
+    "sentences": {
+      "present": {
+        "de": "Ich bin sehr müde nach der langen Reise.",
+        "en": "I am very tired after the long journey."
+      },
+      "past": {
+        "de": "Sie war so müde, dass sie sofort einschlief.",
+        "en": "She was so tired that she fell asleep immediately."
+      },
+      "future": {
+        "de": "Nach dem Marathon wirst du sehr müde sein.",
+        "en": "After the marathon you will be very tired."
+      },
+      "usage1": {
+        "de": "Die Kinder sind müde und gehen ins Bett.",
+        "en": "The children are tired and going to bed."
+      },
+      "usage2": {
+        "de": "Wenn man zu wenig schläft, ist man tagsüber müde.",
+        "en": "If you sleep too little you are tired during the day."
+      },
+      "usage3": {
+        "de": "Er sieht müde aus. Schläft er genug?",
+        "en": "He looks tired. Is he sleeping enough?"
+      }
+    }
+  },
+  {
+    "id": "gluecklich_2061",
+    "german": "glücklich",
+    "article": null,
+    "english": "happy",
+    "wordType": "adjective",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Sie ist sehr glücklich mit ihrem neuen Job.",
+        "en": "She is very happy with her new job."
+      },
+      "past": {
+        "de": "Er war glücklich, als er die gute Nachricht hörte.",
+        "en": "He was happy when he heard the good news."
+      },
+      "future": {
+        "de": "Ich hoffe, du wirst glücklich sein.",
+        "en": "I hope you will be happy."
+      },
+      "usage1": {
+        "de": "Glücklich ist, wer Freunde hat.",
+        "en": "Happy is the one who has friends."
+      },
+      "usage2": {
+        "de": "Das ist das glücklichste Paar, das ich kenne.",
+        "en": "That is the happiest couple I know."
+      },
+      "usage3": {
+        "de": "Die Kinder spielten glücklich im Garten.",
+        "en": "The children played happily in the garden."
+      }
+    }
+  },
+  {
+    "id": "traurig_2062",
+    "german": "traurig",
+    "article": null,
+    "english": "sad",
+    "wordType": "adjective",
+    "theme": "relationships",
+    "sentences": {
+      "present": {
+        "de": "Sie ist traurig, weil ihr Hund krank ist.",
+        "en": "She is sad because her dog is ill."
+      },
+      "past": {
+        "de": "Er war traurig nach dem Abschied.",
+        "en": "He was sad after the farewell."
+      },
+      "future": {
+        "de": "Du wirst traurig sein, wenn du das hörst.",
+        "en": "You will be sad when you hear that."
+      },
+      "usage1": {
+        "de": "Das ist eine traurige Geschichte.",
+        "en": "That is a sad story."
+      },
+      "usage2": {
+        "de": "Warum bist du so traurig?",
+        "en": "Why are you so sad?"
+      },
+      "usage3": {
+        "de": "Es ist traurig, alte Freunde zu verlieren.",
+        "en": "It is sad to lose old friends."
+      }
+    }
+  },
+  {
+    "id": "zufrieden_2063",
+    "german": "zufrieden",
+    "article": null,
+    "english": "satisfied, content",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Er ist zufrieden mit seinem Leben.",
+        "en": "He is content with his life."
+      },
+      "past": {
+        "de": "Die Kunden waren zufrieden mit dem Service.",
+        "en": "The customers were satisfied with the service."
+      },
+      "future": {
+        "de": "Ich hoffe, dass du mit dem Ergebnis zufrieden sein wirst.",
+        "en": "I hope you will be satisfied with the result."
+      },
+      "usage1": {
+        "de": "Sind Sie mit Ihrem Zimmer zufrieden?",
+        "en": "Are you satisfied with your room?"
+      },
+      "usage2": {
+        "de": "Zufrieden zu sein ist ein Zeichen von Stärke.",
+        "en": "Being content is a sign of strength."
+      },
+      "usage3": {
+        "de": "Sie lächelte zufrieden, als die Arbeit fertig war.",
+        "en": "She smiled contentedly when the work was finished."
+      }
+    }
+  },
+  {
+    "id": "billig_2064",
+    "german": "billig",
+    "article": null,
+    "english": "cheap, inexpensive",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Dieses Produkt ist billig, aber von guter Qualität.",
+        "en": "This product is cheap but of good quality."
+      },
+      "past": {
+        "de": "Die Miete war damals viel billiger.",
+        "en": "The rent was much cheaper back then."
+      },
+      "future": {
+        "de": "Im Ausverkauf werden die Sachen billiger sein.",
+        "en": "In the sale the things will be cheaper."
+      },
+      "usage1": {
+        "de": "Ich suche ein billiges Hotel.",
+        "en": "I am looking for a cheap hotel."
+      },
+      "usage2": {
+        "de": "Billig bedeutet nicht immer schlecht.",
+        "en": "Cheap does not always mean bad."
+      },
+      "usage3": {
+        "de": "Im Internet findet man oft billige Flüge.",
+        "en": "On the internet you can often find cheap flights."
+      }
+    }
+  },
+  {
+    "id": "teuer_2065",
+    "german": "teuer",
+    "article": null,
+    "english": "expensive",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Das Kleid ist sehr teuer.",
+        "en": "The dress is very expensive."
+      },
+      "past": {
+        "de": "Das Essen im Restaurant war teuer.",
+        "en": "The food in the restaurant was expensive."
+      },
+      "future": {
+        "de": "Die Reparatur wird teuer sein.",
+        "en": "The repair will be expensive."
+      },
+      "usage1": {
+        "de": "Ist das nicht zu teuer für dich?",
+        "en": "Is that not too expensive for you?"
+      },
+      "usage2": {
+        "de": "Teuer ist nicht immer besser.",
+        "en": "Expensive is not always better."
+      },
+      "usage3": {
+        "de": "In der Stadtmitte ist das Leben sehr teuer.",
+        "en": "Life in the city centre is very expensive."
+      }
+    }
+  },
+  {
+    "id": "einfach_2066",
+    "german": "einfach",
+    "article": null,
+    "english": "simple, easy",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Die Aufgabe ist einfach.",
+        "en": "The task is easy."
+      },
+      "past": {
+        "de": "Das war einfacher als gedacht.",
+        "en": "That was easier than expected."
+      },
+      "future": {
+        "de": "Mit Übung wird es einfacher werden.",
+        "en": "With practice it will get easier."
+      },
+      "usage1": {
+        "de": "Es gibt keine einfache Antwort auf diese Frage.",
+        "en": "There is no simple answer to this question."
+      },
+      "usage2": {
+        "de": "Das Rezept ist einfach und schnell.",
+        "en": "The recipe is simple and quick."
+      },
+      "usage3": {
+        "de": "Sie lebt einfach und bescheiden.",
+        "en": "She lives simply and modestly."
+      }
+    }
+  },
+  {
+    "id": "schwierig_2067",
+    "german": "schwierig",
+    "article": null,
+    "english": "difficult",
+    "wordType": "adjective",
+    "theme": "education",
+    "sentences": {
+      "present": {
+        "de": "Die Prüfung ist sehr schwierig.",
+        "en": "The exam is very difficult."
+      },
+      "past": {
+        "de": "Die Situation war schwierig.",
+        "en": "The situation was difficult."
+      },
+      "future": {
+        "de": "Das nächste Kapitel wird noch schwieriger sein.",
+        "en": "The next chapter will be even more difficult."
+      },
+      "usage1": {
+        "de": "Deutsch ist eine schwierige Sprache.",
+        "en": "German is a difficult language."
+      },
+      "usage2": {
+        "de": "Das ist ein schwieriges Thema.",
+        "en": "That is a difficult topic."
+      },
+      "usage3": {
+        "de": "Es war schwierig, eine Lösung zu finden.",
+        "en": "It was difficult to find a solution."
+      }
+    }
+  },
+  {
+    "id": "leer_2068",
+    "german": "leer",
+    "article": null,
+    "english": "empty",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Der Kühlschrank ist leer.",
+        "en": "The fridge is empty."
+      },
+      "past": {
+        "de": "Das Glas war leer, nachdem er getrunken hatte.",
+        "en": "The glass was empty after he had drunk."
+      },
+      "future": {
+        "de": "Die Batterien werden bald leer sein.",
+        "en": "The batteries will soon be empty."
+      },
+      "usage1": {
+        "de": "Das leere Zimmer wirkst traurig.",
+        "en": "The empty room looks sad."
+      },
+      "usage2": {
+        "de": "Die Straßen sind am Sonntag leer.",
+        "en": "The streets are empty on Sunday."
+      },
+      "usage3": {
+        "de": "Der Tank ist fast leer – wir müssen tanken.",
+        "en": "The tank is almost empty – we need to fill up."
+      }
+    }
+  },
+  {
+    "id": "voll_2069",
+    "german": "voll",
+    "article": null,
+    "english": "full",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Das Restaurant ist voll.",
+        "en": "The restaurant is full."
+      },
+      "past": {
+        "de": "Der Zug war voll und es gab keine freien Plätze.",
+        "en": "The train was full and there were no free seats."
+      },
+      "future": {
+        "de": "Das Hotel wird am Wochenende voll sein.",
+        "en": "The hotel will be full at the weekend."
+      },
+      "usage1": {
+        "de": "Ich bin satt – der Teller war voll.",
+        "en": "I am full – the plate was full."
+      },
+      "usage2": {
+        "de": "Sei vorsichtig, die Tasse ist voll.",
+        "en": "Be careful, the cup is full."
+      },
+      "usage3": {
+        "de": "Der Parkplatz ist voll, wir müssen weitersuchen.",
+        "en": "The car park is full, we have to keep looking."
+      }
+    }
+  },
+  {
+    "id": "warm_2070",
+    "german": "warm",
+    "article": null,
+    "english": "warm",
+    "wordType": "adjective",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Das Wetter ist heute schön warm.",
+        "en": "The weather is pleasantly warm today."
+      },
+      "past": {
+        "de": "Der Sommer war sehr warm.",
+        "en": "The summer was very warm."
+      },
+      "future": {
+        "de": "Es wird im Juli warm sein.",
+        "en": "It will be warm in July."
+      },
+      "usage1": {
+        "de": "Zieh dich warm an, es ist kalt draußen.",
+        "en": "Dress warmly, it is cold outside."
+      },
+      "usage2": {
+        "de": "Das Wasser ist warm genug zum Baden.",
+        "en": "The water is warm enough for swimming."
+      },
+      "usage3": {
+        "de": "Eine warme Mahlzeit tut gut.",
+        "en": "A warm meal does you good."
+      }
+    }
+  },
+  {
+    "id": "kalt_2071",
+    "german": "kalt",
+    "article": null,
+    "english": "cold",
+    "wordType": "adjective",
+    "theme": "environment",
+    "sentences": {
+      "present": {
+        "de": "Der Winter ist kalt und es schneit.",
+        "en": "The winter is cold and it is snowing."
+      },
+      "past": {
+        "de": "Der letzte Winter war besonders kalt.",
+        "en": "Last winter was particularly cold."
+      },
+      "future": {
+        "de": "Es wird in der Nacht sehr kalt werden.",
+        "en": "It will get very cold at night."
+      },
+      "usage1": {
+        "de": "Ich trinke gerne kaltes Wasser.",
+        "en": "I like drinking cold water."
+      },
+      "usage2": {
+        "de": "Meine Hände sind kalt – hast du Handschuhe?",
+        "en": "My hands are cold – do you have gloves?"
+      },
+      "usage3": {
+        "de": "Bei kaltem Wetter trage ich immer eine Jacke.",
+        "en": "In cold weather I always wear a jacket."
+      }
+    }
+  },
+  {
+    "id": "sauber_2072",
+    "german": "sauber",
+    "article": null,
+    "english": "clean",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Die Küche ist sauber und ordentlich.",
+        "en": "The kitchen is clean and tidy."
+      },
+      "past": {
+        "de": "Er machte das Auto sauber.",
+        "en": "He cleaned the car."
+      },
+      "future": {
+        "de": "Ich werde das Zimmer sauber machen.",
+        "en": "I will clean the room."
+      },
+      "usage1": {
+        "de": "Wasch dir die Hände – sie sind nicht sauber.",
+        "en": "Wash your hands – they are not clean."
+      },
+      "usage2": {
+        "de": "Ein sauberes Zuhause ist angenehm.",
+        "en": "A clean home is pleasant."
+      },
+      "usage3": {
+        "de": "Die Wohnung ist nach der Reinigung wieder sauber.",
+        "en": "The flat is clean again after the cleaning."
+      }
+    }
+  },
+  {
+    "id": "schmutzig_2073",
+    "german": "schmutzig",
+    "article": null,
+    "english": "dirty",
+    "wordType": "adjective",
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Die Schuhe sind schmutzig nach dem Spaziergang.",
+        "en": "The shoes are dirty after the walk."
+      },
+      "past": {
+        "de": "Das Kind kam schmutzig nach Hause.",
+        "en": "The child came home dirty."
+      },
+      "future": {
+        "de": "Die Wäsche wird nach der Gartenarbeit schmutzig sein.",
+        "en": "The clothes will be dirty after the gardening."
+      },
+      "usage1": {
+        "de": "Wasch die schmutzigen Tassen bitte ab.",
+        "en": "Please wash the dirty cups."
+      },
+      "usage2": {
+        "de": "Die Straßen sind nach dem Regen sehr schmutzig.",
+        "en": "The streets are very dirty after the rain."
+      },
+      "usage3": {
+        "de": "Schmutzig sein ist kein Problem – dafür gibt es die Waschmaschine.",
+        "en": "Being dirty is no problem – that is what the washing machine is for."
+      }
+    }
+  },
+  {
+    "id": "kaufen_2074",
+    "german": "kaufen",
+    "article": null,
+    "english": "to buy",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "kauft",
+      "simple_past": "kaufte",
+      "perfect": "hat gekauft",
+      "future": "wird kaufen"
+    },
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Sie kauft jeden Tag frisches Brot.",
+        "en": "She buys fresh bread every day."
+      },
+      "past": {
+        "de": "Er kaufte ein neues Fahrrad.",
+        "en": "He bought a new bicycle."
+      },
+      "future": {
+        "de": "Ich werde morgen Lebensmittel kaufen.",
+        "en": "I will buy groceries tomorrow."
+      },
+      "usage1": {
+        "de": "Wo kann ich hier Briefmarken kaufen?",
+        "en": "Where can I buy stamps here?"
+      },
+      "usage2": {
+        "de": "Wir haben das Haus gekauft.",
+        "en": "We bought the house."
+      },
+      "usage3": {
+        "de": "Ich kaufe lieber im Geschäft als online.",
+        "en": "I prefer to buy in the shop than online."
+      }
+    }
+  },
+  {
+    "id": "verkaufen_2075",
+    "german": "verkaufen",
+    "article": null,
+    "english": "to sell",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "verkauft",
+      "simple_past": "verkaufte",
+      "perfect": "hat verkauft",
+      "future": "wird verkaufen"
+    },
+    "theme": "work",
+    "sentences": {
+      "present": {
+        "de": "Er verkauft Autos in einem Autohaus.",
+        "en": "He sells cars at a car dealership."
+      },
+      "past": {
+        "de": "Sie verkaufte ihr altes Fahrrad.",
+        "en": "She sold her old bicycle."
+      },
+      "future": {
+        "de": "Wir werden das Haus verkaufen.",
+        "en": "We will sell the house."
+      },
+      "usage1": {
+        "de": "Dieses Produkt verkauft sich sehr gut.",
+        "en": "This product sells very well."
+      },
+      "usage2": {
+        "de": "Möchtest du dein Auto verkaufen?",
+        "en": "Do you want to sell your car?"
+      },
+      "usage3": {
+        "de": "Sie verkaufte selbst gemachte Marmelade auf dem Markt.",
+        "en": "She sold home-made jam at the market."
+      }
+    }
+  },
+  {
+    "id": "waschen_2076",
+    "german": "waschen",
+    "article": null,
+    "english": "to wash",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "wäscht",
+      "simple_past": "wusch",
+      "perfect": "hat gewaschen",
+      "future": "wird waschen"
+    },
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Sie wäscht die Wäsche jeden Montag.",
+        "en": "She washes the laundry every Monday."
+      },
+      "past": {
+        "de": "Er wusch sich die Hände vor dem Essen.",
+        "en": "He washed his hands before eating."
+      },
+      "future": {
+        "de": "Ich werde das Auto morgen waschen.",
+        "en": "I will wash the car tomorrow."
+      },
+      "usage1": {
+        "de": "Wasch dir bitte die Hände!",
+        "en": "Please wash your hands!"
+      },
+      "usage2": {
+        "de": "Dieser Pullover muss bei 30 Grad gewaschen werden.",
+        "en": "This pullover must be washed at 30 degrees."
+      },
+      "usage3": {
+        "de": "Das Baby wurde sanft gewaschen.",
+        "en": "The baby was washed gently."
+      }
+    }
+  },
+  {
+    "id": "schliessen_2077",
+    "german": "schließen",
+    "article": null,
+    "english": "to close, to shut",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "schließt",
+      "simple_past": "schloss",
+      "perfect": "hat geschlossen",
+      "future": "wird schließen"
+    },
+    "theme": "daily_life",
+    "sentences": {
+      "present": {
+        "de": "Sie schließt die Tür hinter sich.",
+        "en": "She closes the door behind her."
+      },
+      "past": {
+        "de": "Er schloss das Fenster wegen des Lärms.",
+        "en": "He closed the window because of the noise."
+      },
+      "future": {
+        "de": "Das Geschäft wird um 20 Uhr schließen.",
+        "en": "The shop will close at 8 o'clock."
+      },
+      "usage1": {
+        "de": "Bitte schließ die Tür!",
+        "en": "Please close the door!"
+      },
+      "usage2": {
+        "de": "Das Museum ist montags geschlossen.",
+        "en": "The museum is closed on Mondays."
+      },
+      "usage3": {
+        "de": "Er schloss einen Vertrag mit der Firma ab.",
+        "en": "He concluded a contract with the company."
+      }
+    }
+  },
+  {
+    "id": "gewinnen_2078",
+    "german": "gewinnen",
+    "article": null,
+    "english": "to win",
+    "wordType": "verb",
+    "verbForms": {
+      "present_3sg": "gewinnt",
+      "simple_past": "gewann",
+      "perfect": "hat gewonnen",
+      "future": "wird gewinnen"
+    },
+    "theme": "culture",
+    "sentences": {
+      "present": {
+        "de": "Unsere Mannschaft gewinnt das Spiel.",
+        "en": "Our team is winning the game."
+      },
+      "past": {
+        "de": "Sie gewann den ersten Preis.",
+        "en": "She won first prize."
+      },
+      "future": {
+        "de": "Welche Mannschaft wird das Turnier gewinnen?",
+        "en": "Which team will win the tournament?"
+      },
+      "usage1": {
+        "de": "Es ist nicht wichtig zu gewinnen, sondern dabei zu sein.",
+        "en": "It is not important to win but to take part."
+      },
+      "usage2": {
+        "de": "Er hat die Wahl gewonnen.",
+        "en": "He won the election."
+      },
+      "usage3": {
+        "de": "Man kann viel gewinnen, wenn man hart arbeitet.",
+        "en": "You can gain a lot if you work hard."
+      }
+    }
   }
 ]
