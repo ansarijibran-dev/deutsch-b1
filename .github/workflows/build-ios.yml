@@ -90,6 +90,21 @@ jobs:
           with open(path, 'w') as f:
               f.write(src)
           print("Patched RouterToolbarModule.swift")
+
+          # expo-image ImageView.swift — applySymbolEffectiOS26 uses iOS 26-only .drawOn/.drawOff
+          # symbols. The @available attribute marks it available, but Swift still typechecks the body.
+          path = 'node_modules/expo-image/ios/ImageView.swift'
+          with open(path) as f:
+              src = f.read()
+          src = re.sub(
+              r'(@available\(iOS 26\.0, tvOS 26\.0, \*\)\s*private func applySymbolEffectiOS26\([^)]*\)[^{]*\{).*?(\n  \})',
+              r'\1\n  }',
+              src,
+              flags=re.DOTALL
+          )
+          with open(path, 'w') as f:
+              f.write(src)
+          print("Patched expo-image ImageView.swift")
           PYEOF
 
       - name: Patch expo-modules-core for @MainActor conformance compatibility
