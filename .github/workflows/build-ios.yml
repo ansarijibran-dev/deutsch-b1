@@ -25,6 +25,9 @@ jobs:
       - name: Expo prebuild (generate Xcode project)
         run: npx expo prebuild --platform ios --clean
 
+      - name: Remove react-native-screens Gamma sources (iPad split-view, not needed)
+        run: rm -rf node_modules/react-native-screens/ios/gamma
+
       - name: Install CocoaPods
         run: cd ios && pod install
 
