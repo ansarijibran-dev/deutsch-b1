@@ -30,6 +30,57 @@ jobs:
           rm -rf node_modules/react-native-screens/ios/gamma/split-view
           rm -rf node_modules/react-native-screens/ios/gamma/orientation
 
+      - name: Patch Podfile for Swift 6 compatibility
+        run: |
+          echo "--- post_install lines in Podfile ---"
+          grep -n "post_install" ios/Podfile || echo "(none found)"
+          python3 - << 'PYEOF'
+          import re, sys
+
+          with open('ios/Podfile', 'r') as f:
+              content = f.read()
+
+          patch = """
+            # Swift 6 fix: disable strict concurrency on all pod targets
+            installer.pods_project.targets.each do |target|
+              target.build_configurations.each do |config|
+                config.build_settings['SWIFT_STRICT_CONCURRENCY'] = 'minimal'
+                config.build_settings['SWIFT_VERSION'] = '5.9'
+              end
+            end
+            # RNScreens fix: ensure it builds after ReactCodegen
+            installer.pods_project.targets.each do |target|
+              next unless target.name == 'RNScreens'
+              codegen = installer.pods_project.targets.find { |t| t.name == 'ReactCodegen' }
+              next unless codegen
+              dep = installer.pods_project.new(Xcodeproj::Project::Object::PBXTargetDependency)
+              dep.target = codegen
+              target.dependencies << dep
+            end
+          """
+
+          # Inject after the opening line of an existing post_install block
+          new_content, count = re.subn(
+              r'(post_install\s+do\s+\|\w+\|)',
+              r'\1\n' + patch,
+              content,
+              count=1
+          )
+
+          if count == 0:
+              # No post_install block found — append one
+              new_content = content + '\npost_install do |installer|\n' + patch + '\nend\n'
+              print("No post_install block found; appended new one.")
+          else:
+              print(f"Patched existing post_install block.")
+
+          with open('ios/Podfile', 'w') as f:
+              f.write(new_content)
+
+          print("Done. Verifying patch:")
+          PYEOF
+          grep -c "SWIFT_STRICT_CONCURRENCY" ios/Podfile && echo "Patch confirmed in Podfile" || echo "PATCH MISSING"
+
       - name: Install CocoaPods
         run: cd ios && pod install
 
