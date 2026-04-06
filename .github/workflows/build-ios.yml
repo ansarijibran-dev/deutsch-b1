@@ -30,6 +30,17 @@ jobs:
           rm -rf node_modules/react-native-screens/ios/gamma/split-view
           rm -rf node_modules/react-native-screens/ios/gamma/orientation
 
+      - name: Patch expo-modules-core for @MainActor conformance compatibility
+        run: |
+          # Remove @MainActor from protocol conformance positions (unsupported in this Swift mode)
+          sed -i '' 's/ExpoView, @MainActor AnyExpoSwiftUIHostingView/ExpoView, AnyExpoSwiftUIHostingView/' \
+            node_modules/expo-modules-core/ios/Core/Views/SwiftUI/SwiftUIHostingView.swift
+          sed -i '' 's/extension ExpoSwiftUI.SwiftUIVirtualView: @MainActor ExpoSwiftUI.ViewWrapper/extension ExpoSwiftUI.SwiftUIVirtualView: ExpoSwiftUI.ViewWrapper/' \
+            node_modules/expo-modules-core/ios/Core/Views/SwiftUI/SwiftUIVirtualView.swift
+          sed -i '' 's/extension UIView: @MainActor AnyArgument/extension UIView: AnyArgument/' \
+            node_modules/expo-modules-core/ios/Core/Views/ViewDefinition.swift
+          echo "Patched expo-modules-core @MainActor conformances"
+
       - name: Patch Podfile for Swift 6 compatibility
         run: |
           echo "--- post_install lines in Podfile ---"
