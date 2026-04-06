@@ -28,11 +28,24 @@ jobs:
       - name: Install CocoaPods
         run: cd ios && pod install
 
+      - name: Detect Xcode scheme
+        run: |
+          echo "=== Workspace schemes ==="
+          xcodebuild -workspace ios/deutschb1.xcworkspace -list 2>&1 || true
+
       - name: Archive with xcodebuild
         run: |
+          SCHEME=$(xcodebuild -workspace ios/deutschb1.xcworkspace -list 2>&1 \
+            | awk '/Schemes:/,0' \
+            | grep -v "Schemes:" \
+            | grep -v "Pods" \
+            | grep -v "^[[:space:]]*$" \
+            | head -1 \
+            | xargs)
+          echo "Using scheme: '$SCHEME'"
           xcodebuild archive \
             -workspace ios/deutschb1.xcworkspace \
-            -scheme "Deutsch81" \
+            -scheme "$SCHEME" \
             -configuration Release \
             -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
             CODE_SIGN_IDENTITY="" \
