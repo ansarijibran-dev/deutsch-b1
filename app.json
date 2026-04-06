@@ -11,6 +11,6 @@
       "bundleIdentifier": "com.personal.deutschb1",
       "supportsTablet": false
     },
-    "plugins": ["expo-router"]
+    "plugins": ["expo-router", "./plugins/withRNScreensBuildFix"]
   }
 }
