@@ -31,19 +31,6 @@ jobs:
       - name: Install CocoaPods
         run: cd ios && pod install
 
-      - name: Generate React Native codegen artifacts
-        run: |
-          xcodebuild build \
-            -workspace ios/deutschb1.xcworkspace \
-            -scheme ReactCodegen \
-            -destination "generic/platform=iOS" \
-            -configuration Release \
-            -derivedDataPath $RUNNER_TEMP/DerivedData \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            SWIFT_STRICT_CONCURRENCY=minimal
-
       - name: Archive with xcodebuild
         run: |
           xcodebuild archive \
@@ -51,7 +38,6 @@ jobs:
             -scheme "DeutschB1" \
             -configuration Release \
             -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
-            -derivedDataPath $RUNNER_TEMP/DerivedData \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
