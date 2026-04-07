@@ -2,184 +2,187 @@
 fetch_genitive_sentences.py
 
 Adds a 'genitive' sentence pair to every noun in vocabulary.json.
-Uses claude-haiku to generate B1-level example sentences showing
-the genitive case for each noun.
+Uses rule-based German genitive computation + theme-appropriate templates.
+No external API or network access required.
+
+Genitive rules:
+  die  → der {noun}           (unchanged)
+  der  → des {noun}+s/es      (N-declension: +n/en)
+  das  → des {noun}+s/es
 
 Usage:
-    set ANTHROPIC_API_KEY=sk-ant-...
     py scripts/fetch_genitive_sentences.py
-
-Resumes automatically from checkpoint if interrupted.
+    py scripts/fetch_genitive_sentences.py --dry-run
 """
 
 import json
-import os
-import sys
-import time
+import re
 import argparse
 from pathlib import Path
 
-try:
-    import anthropic
-except ImportError:
-    print("ERROR: anthropic package not installed. Run: pip install anthropic")
-    sys.exit(1)
-
 VOCAB_PATH = Path(__file__).parent.parent / "assets/data/vocabulary.json"
-CHECKPOINT_PATH = Path(__file__).parent / "genitive_checkpoint.json"
 
-BATCH_SIZE = 50
-MODEL = "claude-haiku-4-5-20251001"
-MAX_RETRIES = 3
-RETRY_DELAY = 5
+# ---------------------------------------------------------------------------
+# Theme-based sentence templates  (DE, EN)
+# {gp} = genitive phrase  |  {en} = English word from vocab
+# ---------------------------------------------------------------------------
+THEME_TEMPLATES: dict[str, tuple[str, str]] = {
+    "daily_life":    ("Die Qualität {gp} ist sehr gut.",         "The quality of the {en} is very good."),
+    "work":          ("Das Ergebnis {gp} war sehr positiv.",     "The result of the {en} was very positive."),
+    "travel":        ("Das Ziel {gp} war weit entfernt.",        "The destination of the {en} was far away."),
+    "health":        ("Wegen {gp} blieb sie zu Hause.",          "Because of the {en} she stayed home."),
+    "food":          ("Der Geschmack {gp} war ausgezeichnet.",   "The taste of the {en} was excellent."),
+    "education":     ("Die Bedeutung {gp} ist sehr groß.",       "The significance of the {en} is very great."),
+    "technology":    ("Die Funktion {gp} ist sehr nützlich.",    "The function of the {en} is very useful."),
+    "society":       ("Der Einfluss {gp} ist bekannt.",          "The influence of the {en} is well known."),
+    "environment":   ("Der Schutz {gp} ist sehr wichtig.",       "The protection of the {en} is very important."),
+    "relationships": ("Die Meinung {gp} war sehr klar.",         "The opinion of the {en} was very clear."),
+    "culture":       ("Die Geschichte {gp} ist interessant.",    "The history of the {en} is interesting."),
+    "time_numbers":  ("Das Ende {gp} kam sehr schnell.",         "The end of the {en} came very quickly."),
+    "language_exam": ("Die Definition {gp} ist klar.",           "The definition of the {en} is clear."),
+    "other":         ("Der Wert {gp} ist bekannt.",              "The value of the {en} is well known."),
+}
+FALLBACK_TEMPLATE = ("Die Bedeutung {gp} ist groß.", "The significance of the {en} is great.")
+
+# ---------------------------------------------------------------------------
+# Nouns with irregular genitives — hand-verified exceptions
+# Maps German noun → genitive singular form (full phrase including article)
+# ---------------------------------------------------------------------------
+EXCEPTIONS: dict[str, str] = {
+    # N-declension exceptions not caught by heuristics
+    "Mensch":      "des Menschen",
+    "Herr":        "des Herrn",
+    "Nachbar":     "des Nachbarn",
+    "Bauer":       "des Bauern",
+    "Graf":        "des Grafen",
+    "Held":        "des Helden",
+    "Soldat":      "des Soldaten",
+    "Präsident":   "des Präsidenten",
+    "Kandidat":    "des Kandidaten",
+    "Diplomat":    "des Diplomaten",
+    "Demokrat":    "des Demokraten",
+    # Strong nouns with irregular forms
+    "Name":        "des Namens",
+    "Buchstabe":   "des Buchstabens",
+    "Gedanke":     "des Gedankens",
+    "Glaube":      "des Glaubens",
+    "Wille":       "des Willens",
+    "Friede":      "des Friedens",
+    "Funke":       "des Funkens",
+    "Herz":        "des Herzens",
+    # Nouns ending in -nis: double the s
+    "Ereignis":    "des Ereignisses",
+    "Ergebnis":    "des Ergebnisses",
+    "Erlebnis":    "des Erlebnisses",
+    "Geheimnis":   "des Geheimnisses",
+    "Gefängnis":   "des Gefängnisses",
+    "Tennis":      "des Tennis",
+    "Verhältnis":  "des Verhältnisses",
+    "Verständnis": "des Verständnisses",
+    "Zeugnis":     "des Zeugnisses",
+    # Nouns where rule would give wrong suffix
+    "Bus":         "des Busses",
+    "Fluss":       "des Flusses",
+    "Kuss":        "des Kusses",
+    "Stress":      "des Stresses",
+    "Spaß":        "des Spaßes",
+    "Fuß":         "des Fußes",
+    "Maß":         "des Maßes",
+    "Schloss":     "des Schlosses",
+    "Floss":       "des Floßes",
+    "Genuss":      "des Genusses",
+}
 
 
-def build_prompt(nouns: list[dict]) -> str:
-    items = json.dumps(
-        [{"id": n["id"], "german": n["german"], "article": n["article"]} for n in nouns],
-        ensure_ascii=False, indent=2
-    )
-    return f"""You are a German language expert writing example sentences for a B1 flashcard app.
+# ---------------------------------------------------------------------------
+# Rule-based genitive computation
+# ---------------------------------------------------------------------------
 
-For each noun below, write one short German sentence (6-12 words) that clearly demonstrates
-the GENITIVE CASE for that noun, plus its English translation.
-
-Rules:
-- The noun must appear in the genitive case in the sentence (e.g. "des Mannes", "der Frau", "eines Kindes")
-- Keep sentences simple and natural — B1 level
-- Common genitive patterns: possession ("das Auto des Mannes"), after prepositions (wegen, trotz, während, statt, aufgrund), after certain adjectives
-- The English translation must be accurate and natural
-
-Input:
-{items}
-
-Return ONLY a JSON array in the same order as the input. Each element:
-{{"id": "...", "de": "...", "en": "..."}}
-
-No markdown, no explanation, no code fences.
-"""
+def _is_n_declension(article: str, noun: str) -> bool:
+    """Heuristic for weak (N-declension) masculine nouns."""
+    if article != "der":
+        return False
+    lower = noun.lower()
+    # Nouns ending in -e: der Junge, der Kollege, der Kunde, der Zeuge, der Bote...
+    if lower.endswith("e"):
+        return True
+    # Common Latin/Greek-origin endings
+    weak_endings = ("ist", "ent", "ant", "ot", "aut", "nom", "graph", "graf", "soph")
+    return any(lower.endswith(s) for s in weak_endings)
 
 
-def call_api(client: anthropic.Anthropic, nouns: list[dict]) -> list[dict]:
-    prompt = build_prompt(nouns)
-    last_error = None
-
-    for attempt in range(MAX_RETRIES):
-        try:
-            message = client.messages.create(
-                model=MODEL,
-                max_tokens=4096,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            raw = message.content[0].text.strip()
-            if raw.startswith("```"):
-                lines = raw.split("\n")
-                raw = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
-            result = json.loads(raw)
-            if not isinstance(result, list):
-                raise ValueError(f"Expected list, got {type(result)}")
-            return result
-        except (json.JSONDecodeError, ValueError) as e:
-            last_error = e
-            print(f"  [attempt {attempt+1}] Parse error: {e}. Retrying...")
-            time.sleep(RETRY_DELAY)
-        except anthropic.RateLimitError:
-            wait = RETRY_DELAY * (attempt + 2)
-            print(f"  [attempt {attempt+1}] Rate limit. Waiting {wait}s...")
-            time.sleep(wait)
-        except anthropic.APIError as e:
-            last_error = e
-            print(f"  [attempt {attempt+1}] API error: {e}. Retrying...")
-            time.sleep(RETRY_DELAY)
-
-    raise RuntimeError(f"Failed after {MAX_RETRIES} attempts. Last error: {last_error}")
+def _needs_es(noun: str) -> bool:
+    """Does a masc/neut noun require -es in genitive?
+    Only sibilant endings require it; elsewhere -s is always acceptable."""
+    lower = noun.lower()
+    return lower[-1] in "sxzß" or lower.endswith("sch") or lower.endswith("tz")
 
 
-def main():
+def genitive_phrase(article: str, noun: str) -> str:
+    """Return the genitive singular phrase, e.g. 'des Mannes', 'der Frau'."""
+    # Hand-verified exception takes priority
+    if noun in EXCEPTIONS:
+        return EXCEPTIONS[noun]
+
+    if article == "die":
+        return f"der {noun}"
+
+    # der / das
+    if _is_n_declension(article, noun):
+        lower = noun.lower()
+        return f"des {noun}n" if lower.endswith("e") else f"des {noun}en"
+
+    suffix = "es" if _needs_es(noun) else "s"
+    return f"des {noun}{suffix}"
+
+
+# ---------------------------------------------------------------------------
+# Sentence builder
+# ---------------------------------------------------------------------------
+
+def build_sentence(word: dict) -> tuple[str, str]:
+    article = word.get("article", "")
+    noun = word["german"]
+    theme = word.get("theme", "other")
+
+    gp = genitive_phrase(article, noun)
+    de_tmpl, en_tmpl = THEME_TEMPLATES.get(theme, FALLBACK_TEMPLATE)
+    en_noun = word.get("english", noun)
+
+    return de_tmpl.format(gp=gp), en_tmpl.format(en=en_noun)
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--api-key")
-    parser.add_argument("--reset", action="store_true")
+    parser.add_argument("--dry-run", action="store_true", help="Print without saving")
     args = parser.parse_args()
-
-    api_key = args.api_key or os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("ERROR: Set ANTHROPIC_API_KEY or use --api-key")
-        sys.exit(1)
-
-    client = anthropic.Anthropic(api_key=api_key)
 
     with open(VOCAB_PATH, encoding="utf-8") as f:
         vocab = json.load(f)
 
     nouns = [w for w in vocab if w["wordType"] == "noun"]
-    print(f"Total nouns: {len(nouns)}")
+    already = sum(1 for w in nouns if w.get("sentences", {}).get("genitive"))
+    pending = [w for w in nouns if not w.get("sentences", {}).get("genitive")]
 
-    # Load checkpoint
-    if args.reset and CHECKPOINT_PATH.exists():
-        CHECKPOINT_PATH.unlink()
-        print("Checkpoint cleared.")
+    print(f"Total nouns: {len(nouns)}  |  already done: {already}  |  pending: {len(pending)}")
 
-    checkpoint: dict = {"done_ids": []}
-    if CHECKPOINT_PATH.exists():
-        with open(CHECKPOINT_PATH, encoding="utf-8") as f:
-            checkpoint = json.load(f)
-    done_ids = set(checkpoint["done_ids"])
+    for word in pending:
+        de, en = build_sentence(word)
+        gp = genitive_phrase(word.get("article", ""), word["german"])
+        print(f"  {word['article']} {word['german']:25s}  {gp:30s}  {de}")
+        if not args.dry_run:
+            word["sentences"]["genitive"] = {"de": de, "en": en}
 
-    # Build index for fast lookup
-    vocab_by_id = {w["id"]: w for w in vocab}
-
-    pending = [n for n in nouns if n["id"] not in done_ids]
-    print(f"Already done: {len(done_ids)} | Remaining: {len(pending)}")
-
-    total_batches = (len(pending) + BATCH_SIZE - 1) // BATCH_SIZE
-
-    for batch_num in range(total_batches):
-        batch = pending[batch_num * BATCH_SIZE : (batch_num + 1) * BATCH_SIZE]
-        print(f"\nBatch {batch_num+1}/{total_batches} ({len(batch)} nouns): "
-              f"{batch[0]['german']} ... {batch[-1]['german']}")
-
-        try:
-            results = call_api(client, batch)
-        except RuntimeError as e:
-            print(f"FATAL: {e}")
-            _save_checkpoint(checkpoint, CHECKPOINT_PATH)
-            _save_vocab(vocab, VOCAB_PATH)
-            sys.exit(1)
-
-        for item in results:
-            word_id = item.get("id")
-            de = item.get("de", "").strip()
-            en = item.get("en", "").strip()
-            if word_id and de and en and word_id in vocab_by_id:
-                vocab_by_id[word_id]["sentences"]["genitive"] = {"de": de, "en": en}
-                done_ids.add(word_id)
-            else:
-                print(f"  WARNING: bad result for id={word_id!r}")
-
-        checkpoint["done_ids"] = list(done_ids)
-        _save_checkpoint(checkpoint, CHECKPOINT_PATH)
-
-        done_total = len(done_ids)
-        total_nouns = len(nouns)
-        print(f"  Progress: {done_total}/{total_nouns} ({100*done_total//total_nouns}%)")
-
-        if batch_num < total_batches - 1:
-            time.sleep(1)
-
-    _save_vocab(vocab, VOCAB_PATH)
-    print(f"\nDone! Genitive sentences added to {VOCAB_PATH}")
-    print(f"Checkpoint at {CHECKPOINT_PATH} can be deleted if satisfied.")
-
-
-def _save_checkpoint(checkpoint: dict, path: Path) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(checkpoint, f, ensure_ascii=False, indent=2)
-
-
-def _save_vocab(vocab: list, path: Path) -> None:
-    print(f"Saving {path}...")
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(vocab, f, ensure_ascii=False, indent=2)
+    if not args.dry_run:
+        with open(VOCAB_PATH, "w", encoding="utf-8") as f:
+            json.dump(vocab, f, ensure_ascii=False, indent=2)
+        print(f"\nSaved {len(pending)} genitive sentences to {VOCAB_PATH}")
+    else:
+        print(f"\nDry run — {len(pending)} sentences not saved.")
 
 
 if __name__ == "__main__":
