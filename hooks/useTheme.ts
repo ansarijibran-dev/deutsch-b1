@@ -28,9 +28,9 @@ const light = {
   passBg:           '#DCFCE7',
   judgeText:        '#374151',
   genderColors: {
-    masculine: '#BFDBFE',
+    masculine: '#C7D2FE',
     feminine:  '#FBCFE8',
-    neuter:    '#FDE68A',
+    neuter:    '#FEF3C7',
     null:      '#FFFFFF',
   } as Record<string, string>,
 };

@@ -110,7 +110,7 @@ export function FlashCard({
 
               {/* Plural */}
               {word.plural && (
-                <Text style={[styles.plural, { color: c.text3 }]}>Plural: {word.plural}</Text>
+                <Text style={[styles.plural, { color: c.text2 }]}>Plural: {word.plural}</Text>
               )}
 
               {/* Action buttons */}
