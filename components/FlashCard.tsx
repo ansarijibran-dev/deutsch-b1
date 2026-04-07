@@ -1,11 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   TouchableWithoutFeedback, TouchableOpacity, View, Text,
-  ScrollView, StyleSheet, Dimensions,
+  ScrollView, StyleSheet, Dimensions, Animated,
 } from 'react-native';
-import Animated, {
-  useSharedValue, useAnimatedStyle, withTiming, interpolate, Extrapolation,
-} from 'react-native-reanimated';
 import { Word, ARTICLE_GENDER, WORD_TYPE_LABELS } from '../data/types';
 import { useTheme } from '../hooks/useTheme';
 
@@ -33,26 +30,19 @@ export function FlashCard({
   onPass, onFail, onReviewToggle, isInReview,
   currentIndex, total, score,
 }: Props) {
-  const rotation = useSharedValue(0);
+  const rotation = useRef(new Animated.Value(0)).current;
   const [flipped, setFlipped] = useState(false);
   const c = useTheme();
 
   const handleFlip = useCallback(() => {
     const next = !flipped;
-    rotation.value = withTiming(next ? 180 : 0, { duration: 400 });
+    Animated.timing(rotation, { toValue: next ? 180 : 0, duration: 400, useNativeDriver: true }).start();
     setFlipped(next);
     onFlipped?.(next);
   }, [flipped, rotation, onFlipped]);
 
-  const frontStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateY: `${interpolate(rotation.value, [0, 180], [0, 180], Extrapolation.CLAMP)}deg` }],
-    backfaceVisibility: 'hidden',
-  }));
-
-  const backStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateY: `${interpolate(rotation.value, [0, 180], [180, 360], Extrapolation.CLAMP)}deg` }],
-    backfaceVisibility: 'hidden',
-  }));
+  const frontRotation = rotation.interpolate({ inputRange: [0, 180], outputRange: ['0deg', '180deg'] });
+  const backRotation = rotation.interpolate({ inputRange: [0, 180], outputRange: ['180deg', '360deg'] });
 
   const frontText = mode === 'de-en'
     ? `${word.article ? word.article + ' ' : ''}${word.german}`
@@ -74,7 +64,7 @@ export function FlashCard({
       <TouchableWithoutFeedback onPress={handleFlip}>
         <View style={styles.container}>
           {/* FRONT */}
-          <Animated.View style={[styles.card, styles.front, frontStyle, { backgroundColor: c.card }]}>
+          <Animated.View style={[styles.card, styles.front, { transform: [{ rotateY: frontRotation }], backfaceVisibility: 'hidden' }, { backgroundColor: c.card }]}>
             <Text style={[styles.mainWord, { color: c.text1 }]}>{frontText}</Text>
             <Text style={[styles.hint, { color: c.textMuted }]}>Tap to reveal</Text>
             <TouchableOpacity style={styles.skipBtn} onPress={onSkip} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
@@ -83,7 +73,7 @@ export function FlashCard({
           </Animated.View>
 
           {/* BACK */}
-          <Animated.View style={[styles.card, styles.back, { backgroundColor: cardBg }, backStyle]}>
+          <Animated.View style={[styles.card, styles.back, { backgroundColor: cardBg, transform: [{ rotateY: backRotation }], backfaceVisibility: 'hidden' }]}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.backContent}>
               {/* Badge row */}
               <View style={styles.badgeRow}>
