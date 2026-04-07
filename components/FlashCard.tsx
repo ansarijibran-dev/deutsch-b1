@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import {
-  TouchableWithoutFeedback, TouchableOpacity, View, Text, Image,
+  TouchableWithoutFeedback, TouchableOpacity, View, Text,
   ScrollView, StyleSheet, Dimensions,
 } from 'react-native';
 import Animated, {
   useSharedValue, useAnimatedStyle, withTiming, interpolate, Extrapolation,
 } from 'react-native-reanimated';
 import { Word, ARTICLE_GENDER, GENDER_COLORS, WORD_TYPE_LABELS } from '../data/types';
-import imageMap from '../assets/data/imageMap';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH - 48;
@@ -59,7 +58,6 @@ export function FlashCard({
 
   const gender = word.article ? ARTICLE_GENDER[word.article] : null;
   const cardBg = gender ? GENDER_COLORS[gender] : '#FFFFFF';
-  const nounImage = word.wordType === 'noun' && word.image ? imageMap[word.id] : null;
 
   const completionPct = total > 0 ? Math.round((score / total) * 100) : 0;
 
@@ -75,9 +73,6 @@ export function FlashCard({
         <View style={styles.container}>
           {/* FRONT */}
           <Animated.View style={[styles.card, styles.front, frontStyle]}>
-            {nounImage && (
-              <Image source={nounImage} style={styles.nounImage} resizeMode="contain" />
-            )}
             <Text style={styles.mainWord}>{frontText}</Text>
             <Text style={styles.hint}>Tap to reveal</Text>
             <TouchableOpacity style={styles.skipBtn} onPress={onSkip} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
   },
   front: { justifyContent: 'center', alignItems: 'center' },
   back: {},
-  nounImage: { width: 120, height: 100, marginBottom: 12, borderRadius: 8 },
   mainWord: { fontSize: 30, fontWeight: '700', color: '#111827', textAlign: 'center' },
   hint: { fontSize: 12, color: '#D1D5DB', marginTop: 10 },
   skipBtn: { position: 'absolute', bottom: 16, right: 16 },

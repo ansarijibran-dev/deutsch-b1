@@ -75,7 +75,6 @@ export interface Word {
   wordType: WordType;
   plural: string | null;
   theme: Theme;
-  image?: string;        // relative path e.g. "assets/images/nouns/hund_001.jpg"
   verbForms?: VerbForms; // legacy — kept for backward compat
   tenses?: TenseForms;   // full conjugation table for verbs
   sentences: Sentences;
