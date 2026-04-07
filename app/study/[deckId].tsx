@@ -25,9 +25,9 @@ function shuffle<T>(arr: T[]): T[] {
 function resolveDeckIds(deckId: string, reviewIds: string[]): string[] {
   if (deckId === 'random') return shuffle(getAllWords().map(w => w.id));
   if (deckId === 'review') return reviewIds;
-  if (deckId.startsWith('theme:')) return getWordsByTheme(deckId.slice(6) as Theme).map(w => w.id);
-  if (deckId.startsWith('type:')) return getWordsByType(deckId.slice(5) as WordType).map(w => w.id);
-  if (deckId.startsWith('difficulty:')) return getWordsByDifficulty(deckId.slice(11)).map(w => w.id);
+  if (deckId.startsWith('theme:')) return shuffle(getWordsByTheme(deckId.slice(6) as Theme).map(w => w.id));
+  if (deckId.startsWith('type:')) return shuffle(getWordsByType(deckId.slice(5) as WordType).map(w => w.id));
+  if (deckId.startsWith('difficulty:')) return shuffle(getWordsByDifficulty(deckId.slice(11)).map(w => w.id));
   return [];
 }
 
@@ -43,7 +43,7 @@ export default function StudyScreen() {
   const wordIds = useMemo(() => resolveDeckIds(deckId, reviewIds), [deckId, reviewIds]);
   const startIndex = deckId === 'random' ? 0 : getDeckPosition(deckId);
 
-  const { currentWord, currentIndex, isFinished, score, total, progressFraction, advance } =
+  const { currentWord, currentIndex, isFinished, score, total, progressFraction, advance, goBack, canGoBack } =
     useStudySession(wordIds, startIndex);
 
   const translateX = useRef(new RNAnimated.Value(0)).current;
@@ -103,12 +103,16 @@ export default function StudyScreen() {
           <View style={[styles.progressBarFill, { flex: progressFraction, backgroundColor: c.progressFill }]} />
           <View style={{ flex: 1 - progressFraction }} />
         </View>
+        <TouchableOpacity onPress={goBack} disabled={!canGoBack}>
+          <Text style={[styles.prev, { color: canGoBack ? c.accent : c.textMuted }]}>↩ Prev</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.cardArea}>
         <RNAnimated.View style={{ transform: [{ translateX }] }} {...panResponder.panHandlers}>
           {currentWord && (
             <FlashCard
+              key={currentIndex}
               word={currentWord}
               mode={languageMode}
               currentIndex={currentIndex}
@@ -141,6 +145,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   back: { fontSize: 17 },
+  prev: { fontSize: 14, fontWeight: '500' },
   progressBarTrack: {
     flex: 1,
     height: 6,
