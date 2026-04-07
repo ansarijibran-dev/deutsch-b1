@@ -176,10 +176,10 @@ jobs:
       - name: Archive with xcodebuild
         run: |
           xcodebuild archive \
-            -workspace ios/deutschb1.xcworkspace \
-            -scheme "DeutschB1" \
+            -workspace ios/Velocitrainer.xcworkspace \
+            -scheme "Velocitrainer" \
             -configuration Release \
-            -archivePath $RUNNER_TEMP/deutschb1.xcarchive \
+            -archivePath $RUNNER_TEMP/Velocitrainer.xcarchive \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
@@ -189,15 +189,15 @@ jobs:
       - name: Export IPA (manual packaging — bypasses team requirement)
         run: |
           mkdir -p "$RUNNER_TEMP/Payload"
-          cp -R "$RUNNER_TEMP/deutschb1.xcarchive/Products/Applications/DeutschB1.app" "$RUNNER_TEMP/Payload/"
+          cp -R "$RUNNER_TEMP/Velocitrainer.xcarchive/Products/Applications/Velocitrainer.app" "$RUNNER_TEMP/Payload/"
           cd "$RUNNER_TEMP"
-          zip -r "DeutschB1.ipa" Payload
+          zip -r "Velocitrainer.ipa" Payload
           mkdir -p "$RUNNER_TEMP/ipa-output"
-          cp "$RUNNER_TEMP/DeutschB1.ipa" "$RUNNER_TEMP/ipa-output/"
+          cp "$RUNNER_TEMP/Velocitrainer.ipa" "$RUNNER_TEMP/ipa-output/"
 
       - name: Upload IPA as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: deutschb1-ios-ipa
+          name: velocitrainer-ios-ipa
           path: ${{ runner.temp }}/ipa-output/*.ipa
           retention-days: 30
