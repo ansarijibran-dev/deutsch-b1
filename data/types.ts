@@ -9,6 +9,8 @@ export type WordType =
   | 'conjunction'
   | 'other';
 
+export type Difficulty = 'easy' | 'medium' | 'hard';
+
 export type Theme =
   | 'daily_life'
   | 'work'
@@ -75,8 +77,10 @@ export interface Word {
   wordType: WordType;
   plural: string | null;
   theme: Theme;
+  difficulty: Difficulty;
   verbForms?: VerbForms; // legacy — kept for backward compat
   tenses?: TenseForms;   // full conjugation table for verbs
+  nounForm?: string | null;
   sentences: Sentences;
 }
 
@@ -117,6 +121,18 @@ export const THEME_LABELS: Record<Theme, string> = {
   time_numbers: 'Time & Numbers',
   language_exam: 'Exam Language',
   other: 'Other',
+};
+
+export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
+  easy:   'Easy',
+  medium: 'Medium',
+  hard:   'Hard',
+};
+
+export const DIFFICULTY_COLORS: Record<Difficulty, string> = {
+  easy:   '#F0FDF4',  // green-50
+  medium: '#FFFBEB',  // amber-50
+  hard:   '#FFF1F2',  // rose-50
 };
 
 export const WORD_TYPE_LABELS: Record<WordType, string> = {

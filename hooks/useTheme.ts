@@ -1,0 +1,78 @@
+import { useColorScheme } from 'react-native';
+
+const light = {
+  screen:           '#F1F5F9',
+  card:             '#FFFFFF',
+  input:            '#F3F4F6',
+  text1:            '#111827',
+  text2:            '#374151',
+  text3:            '#6B7280',
+  textMuted:        '#9CA3AF',
+  border:           '#E5E7EB',
+  accent:           '#003781',
+  accentLight:      '#EFF6FF',
+  accentLightText:  '#003781',
+  progressFill:     '#003781',
+  progressTrack:    '#E5E7EB',
+  tileBg:           '#F3F4F6',
+  reviewTileBg:     '#FEF9C3',
+  chipBg:           '#F3F4F6',
+  chipText:         '#374151',
+  themeChipBg:      '#EFF6FF',
+  themeChipText:    '#003781',
+  rowBg:            '#F9FAFB',
+  tableBg:          '#F9FAFB',
+  primaryBg:        '#003781',
+  primaryText:      '#FFFFFF',
+  failBg:           '#FEE2E2',
+  passBg:           '#DCFCE7',
+  judgeText:        '#374151',
+  genderColors: {
+    masculine: '#DBEAFE',
+    feminine:  '#FCE7F3',
+    neuter:    '#FEF9C3',
+    null:      '#FFFFFF',
+  } as Record<string, string>,
+};
+
+const dark = {
+  screen:           '#0F172A',
+  card:             '#1E293B',
+  input:            '#1E293B',
+  text1:            '#F1F5F9',
+  text2:            '#CBD5E1',
+  text3:            '#94A3B8',
+  textMuted:        '#64748B',
+  border:           '#334155',
+  accent:           '#3B82F6',
+  accentLight:      '#1E3A5F',
+  accentLightText:  '#93C5FD',
+  progressFill:     '#3B82F6',
+  progressTrack:    '#334155',
+  tileBg:           '#1E293B',
+  reviewTileBg:     '#2D2A14',
+  chipBg:           '#1E293B',
+  chipText:         '#CBD5E1',
+  themeChipBg:      '#1E3A5F',
+  themeChipText:    '#93C5FD',
+  rowBg:            '#1E293B',
+  tableBg:          '#1E293B',
+  primaryBg:        '#1A56DB',
+  primaryText:      '#FFFFFF',
+  failBg:           '#450A0A',
+  passBg:           '#052E16',
+  judgeText:        '#F1F5F9',
+  genderColors: {
+    masculine: '#1E3A5F',
+    feminine:  '#6D1A3E',
+    neuter:    '#6B3A0E',
+    null:      '#1E293B',
+  } as Record<string, string>,
+};
+
+export type Theme = typeof light;
+
+export function useTheme(): Theme {
+  const scheme = useColorScheme();
+  return scheme === 'dark' ? dark : light;
+}

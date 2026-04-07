@@ -6,6 +6,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { FlashCard } from '../../components/FlashCard';
 import { useStudySession } from '../../hooks/useStudySession';
 import { useProgress } from '../../hooks/useProgress';
+import { useTheme } from '../../hooks/useTheme';
 import { getAllWords, getWordsByTheme, getWordsByType } from '../../data/loader';
 import { Theme, WordType } from '../../data/types';
 
@@ -32,6 +33,7 @@ function resolveDeckIds(deckId: string, reviewIds: string[]): string[] {
 export default function StudyScreen() {
   const { deckId } = useLocalSearchParams<{ deckId: string }>();
   const router = useRouter();
+  const c = useTheme();
   const {
     reviewIds, markKnown, markUnknown, saveDeckPosition, getDeckPosition,
     isInReview, addToReview, removeFromReview, languageMode,
@@ -77,13 +79,13 @@ export default function StudyScreen() {
 
   if (isFinished || wordIds.length === 0) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { backgroundColor: c.screen }]}>
         <View style={styles.summary}>
           <Text style={styles.summaryEmoji}>🎉</Text>
-          <Text style={styles.summaryTitle}>Session Complete!</Text>
-          <Text style={styles.summaryScore}>{score} / {total} known</Text>
-          <TouchableOpacity style={styles.doneButton} onPress={() => router.replace('/')}>
-            <Text style={styles.doneButtonText}>Done</Text>
+          <Text style={[styles.summaryTitle, { color: c.text1 }]}>Session Complete!</Text>
+          <Text style={[styles.summaryScore, { color: c.text3 }]}>{score} / {total} known</Text>
+          <TouchableOpacity style={[styles.doneButton, { backgroundColor: c.primaryBg }]} onPress={() => router.replace('/')}>
+            <Text style={[styles.doneButtonText, { color: c.primaryText }]}>Done</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -91,13 +93,13 @@ export default function StudyScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: c.screen }]}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.replace('/')}>
-          <Text style={styles.back}>‹ Back</Text>
+          <Text style={[styles.back, { color: c.accent }]}>‹ Back</Text>
         </TouchableOpacity>
-        <View style={styles.progressBarTrack}>
-          <View style={[styles.progressBarFill, { flex: progressFraction }]} />
+        <View style={[styles.progressBarTrack, { backgroundColor: c.progressTrack }]}>
+          <View style={[styles.progressBarFill, { flex: progressFraction, backgroundColor: c.progressFill }]} />
           <View style={{ flex: 1 - progressFraction }} />
         </View>
       </View>
@@ -129,7 +131,7 @@ export default function StudyScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1 },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -137,27 +139,25 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     gap: 12,
   },
-  back: { fontSize: 17, color: '#003781' },
+  back: { fontSize: 17 },
   progressBarTrack: {
     flex: 1,
     height: 6,
     flexDirection: 'row',
-    backgroundColor: '#E5E7EB',
     borderRadius: 3,
     overflow: 'hidden',
   },
-  progressBarFill: { backgroundColor: '#003781', borderRadius: 3 },
+  progressBarFill: { borderRadius: 3 },
   cardArea: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   summary: { flex: 1, justifyContent: 'center', alignItems: 'center', gap: 12 },
   summaryEmoji: { fontSize: 56 },
-  summaryTitle: { fontSize: 28, fontWeight: '700', color: '#111827' },
-  summaryScore: { fontSize: 20, color: '#6B7280' },
+  summaryTitle: { fontSize: 28, fontWeight: '700' },
+  summaryScore: { fontSize: 20 },
   doneButton: {
     marginTop: 24,
-    backgroundColor: '#003781',
     paddingHorizontal: 40,
     paddingVertical: 14,
     borderRadius: 12,
   },
-  doneButtonText: { color: '#FFF', fontSize: 16, fontWeight: '600' },
+  doneButtonText: { fontSize: 16, fontWeight: '600' },
 });

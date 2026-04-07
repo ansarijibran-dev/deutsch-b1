@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TenseConjugation } from '../data/types';
+import { useTheme } from '../hooks/useTheme';
 
 interface Props {
   label: string;
@@ -17,13 +18,14 @@ const ROWS: { key: keyof TenseConjugation; pronoun: string }[] = [
 ];
 
 export function TenseTable({ label, conjugation }: Props) {
+  const c = useTheme();
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>{label}</Text>
+    <View style={[styles.container, { backgroundColor: c.tableBg }]}>
+      <Text style={[styles.heading, { color: c.text2 }]}>{label}</Text>
       {ROWS.map(({ key, pronoun }) => (
-        <View key={key} style={styles.row}>
-          <Text style={styles.pronoun}>{pronoun}</Text>
-          <Text style={styles.form}>{conjugation[key] ?? '—'}</Text>
+        <View key={key} style={[styles.row, { borderBottomColor: c.border }]}>
+          <Text style={[styles.pronoun, { color: c.text3 }]}>{pronoun}</Text>
+          <Text style={[styles.form, { color: c.text1 }]}>{conjugation[key] ?? '—'}</Text>
         </View>
       ))}
     </View>
@@ -33,14 +35,12 @@ export function TenseTable({ label, conjugation }: Props) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    backgroundColor: '#F9FAFB',
     borderRadius: 10,
     padding: 12,
   },
   heading: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#374151',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 8,
@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 3,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#E5E7EB',
   },
-  pronoun: { fontSize: 13, color: '#6B7280', width: 100 },
-  form: { fontSize: 13, color: '#111827', fontWeight: '500', flex: 1, textAlign: 'right' },
+  pronoun: { fontSize: 13, width: 100 },
+  form: { fontSize: 13, fontWeight: '500', flex: 1, textAlign: 'right' },
 });

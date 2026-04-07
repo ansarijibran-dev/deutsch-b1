@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useProgress } from '../hooks/useProgress';
+import { useTheme } from '../hooks/useTheme';
 import { getAllWords, getAllThemes } from '../data/loader';
 import { SearchOverlay } from '../components/SearchOverlay';
 import { THEME_LABELS, WORD_TYPE_LABELS, WordType, Theme } from '../data/types';
@@ -18,32 +19,33 @@ export default function HomeScreen() {
   const { totalStudied, reviewIds, languageMode, setLanguageMode } = useProgress();
   const [searchVisible, setSearchVisible] = useState(false);
   const themes = getAllThemes();
+  const c = useTheme();
 
   const progress = TOTAL > 0 ? totalStudied / TOTAL : 0;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: c.screen }]}>
       {/* Header */}
-      <View style={styles.headerBar}>
-        <Text style={styles.appName}>Velocitrainer</Text>
+      <View style={[styles.headerBar, { borderBottomColor: c.border }]}>
+        <Text style={[styles.appName, { color: c.accent }]}>Velocitrainer</Text>
       </View>
 
       {/* Controls bar */}
-      <View style={styles.controlsBar}>
+      <View style={[styles.controlsBar, { borderBottomColor: c.border }]}>
         <TouchableOpacity
-          style={styles.langToggle}
+          style={[styles.langToggle, { backgroundColor: c.accentLight }]}
           onPress={() => setLanguageMode(languageMode === 'de-en' ? 'en-de' : 'de-en')}
         >
-          <Text style={styles.langToggleText}>
+          <Text style={[styles.langToggleText, { color: c.accentLightText }]}>
             {languageMode === 'de-en' ? 'DE → EN' : 'EN → DE'}
           </Text>
         </TouchableOpacity>
 
-        <View style={styles.progressPill}>
-          <View style={[styles.progressFill, { flex: progress }]} />
+        <View style={[styles.progressPill, { backgroundColor: c.progressTrack }]}>
+          <View style={[styles.progressFill, { flex: progress, backgroundColor: c.progressFill }]} />
           <View style={{ flex: 1 - progress }} />
         </View>
-        <Text style={styles.progressText}>{totalStudied}/{TOTAL}</Text>
+        <Text style={[styles.progressText, { color: c.text3 }]}>{totalStudied}/{TOTAL}</Text>
 
         <TouchableOpacity onPress={() => setSearchVisible(true)} style={styles.searchIcon}>
           <Text style={styles.searchIconText}>🔍</Text>
@@ -53,15 +55,15 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         {/* Quick action tiles */}
         <View style={styles.tilesRow}>
-          <TouchableOpacity style={styles.tile} onPress={() => router.push('/study/random')}>
+          <TouchableOpacity style={[styles.tile, { backgroundColor: c.tileBg }]} onPress={() => router.push('/study/random')}>
             <Text style={styles.tileIcon}>🔀</Text>
-            <Text style={styles.tileLabel}>Randomize</Text>
+            <Text style={[styles.tileLabel, { color: c.text1 }]}>Randomize</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.tile, styles.reviewTile]} onPress={() => router.push('/review')}>
+          <TouchableOpacity style={[styles.tile, { backgroundColor: c.reviewTileBg }]} onPress={() => router.push('/review')}>
             <Text style={styles.tileIcon}>⭐</Text>
-            <Text style={styles.tileLabel}>For Review</Text>
+            <Text style={[styles.tileLabel, { color: c.text1 }]}>For Review</Text>
             {reviewIds.length > 0 && (
-              <View style={styles.badge}>
+              <View style={[styles.badge, { backgroundColor: c.accent }]}>
                 <Text style={styles.badgeText}>{reviewIds.length}</Text>
               </View>
             )}
@@ -69,29 +71,29 @@ export default function HomeScreen() {
         </View>
 
         {/* Word Type section */}
-        <Text style={styles.sectionLabel}>WORD TYPE</Text>
+        <Text style={[styles.sectionLabel, { color: c.textMuted }]}>WORD TYPE</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
           {WORD_TYPES.map(type => (
             <TouchableOpacity
               key={type}
-              style={styles.chip}
+              style={[styles.chip, { backgroundColor: c.chipBg }]}
               onPress={() => router.push(`/study/type:${type}`)}
             >
-              <Text style={styles.chipText}>{WORD_TYPE_LABELS[type]}</Text>
+              <Text style={[styles.chipText, { color: c.chipText }]}>{WORD_TYPE_LABELS[type]}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
 
         {/* Thematic section */}
-        <Text style={styles.sectionLabel}>THEMATIC</Text>
+        <Text style={[styles.sectionLabel, { color: c.textMuted }]}>THEMATIC</Text>
         <View style={styles.themeGrid}>
           {themes.map(theme => (
             <TouchableOpacity
               key={theme}
-              style={styles.themeChip}
+              style={[styles.themeChip, { backgroundColor: c.themeChipBg }]}
               onPress={() => router.push(`/study/theme:${theme}`)}
             >
-              <Text style={styles.themeChipText}>{THEME_LABELS[theme as Theme]}</Text>
+              <Text style={[styles.themeChipText, { color: c.themeChipText }]}>{THEME_LABELS[theme as Theme]}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -106,15 +108,14 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFF' },
+  container: { flex: 1 },
   headerBar: {
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#E5E7EB',
     alignItems: 'center',
   },
-  appName: { fontSize: 20, fontWeight: '800', color: '#003781', letterSpacing: 0.5 },
+  appName: { fontSize: 20, fontWeight: '800', letterSpacing: 0.5 },
   controlsBar: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -122,45 +123,39 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     gap: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#E5E7EB',
   },
   langToggle: {
     paddingHorizontal: 10,
     paddingVertical: 6,
-    backgroundColor: '#EFF6FF',
     borderRadius: 8,
   },
-  langToggleText: { fontSize: 12, fontWeight: '700', color: '#003781' },
+  langToggleText: { fontSize: 12, fontWeight: '700' },
   progressPill: {
     flex: 1,
     height: 6,
     flexDirection: 'row',
-    backgroundColor: '#E5E7EB',
     borderRadius: 3,
     overflow: 'hidden',
   },
-  progressFill: { backgroundColor: '#003781', borderRadius: 3 },
-  progressText: { fontSize: 11, color: '#6B7280', fontWeight: '500' },
+  progressFill: { borderRadius: 3 },
+  progressText: { fontSize: 11, fontWeight: '500' },
   searchIcon: { padding: 4 },
   searchIconText: { fontSize: 18 },
   content: { padding: 16, gap: 4 },
   tilesRow: { flexDirection: 'row', gap: 12, marginBottom: 20 },
   tile: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
     borderRadius: 14,
     padding: 18,
     alignItems: 'center',
     gap: 6,
   },
-  reviewTile: { backgroundColor: '#FEF9C3' },
   tileIcon: { fontSize: 24 },
-  tileLabel: { fontSize: 14, fontWeight: '700', color: '#111827' },
+  tileLabel: { fontSize: 14, fontWeight: '700' },
   badge: {
     position: 'absolute',
     top: 10,
     right: 10,
-    backgroundColor: '#003781',
     borderRadius: 10,
     paddingHorizontal: 6,
     paddingVertical: 2,
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#9CA3AF',
     letterSpacing: 0.8,
     marginBottom: 8,
     marginTop: 4,
@@ -178,16 +172,14 @@ const styles = StyleSheet.create({
   chip: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#F3F4F6',
     borderRadius: 20,
   },
-  chipText: { fontSize: 14, fontWeight: '600', color: '#374151' },
+  chipText: { fontSize: 14, fontWeight: '600' },
   themeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
   themeChip: {
     paddingHorizontal: 14,
     paddingVertical: 8,
-    backgroundColor: '#EFF6FF',
     borderRadius: 20,
   },
-  themeChipText: { fontSize: 13, fontWeight: '600', color: '#003781' },
+  themeChipText: { fontSize: 13, fontWeight: '600' },
 });
