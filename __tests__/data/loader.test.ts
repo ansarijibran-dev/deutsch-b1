@@ -6,6 +6,7 @@ import {
   getWordById,
   searchWords,
   getWeakWords,
+  getReviewWords,
   getAllThemes,
   getWordCountByTheme,
   getWordCountByType,
@@ -90,5 +91,25 @@ describe('loader', () => {
     expect(counts['noun']).toBe(3);
     // sample data has 2 verbs
     expect(counts['verb']).toBe(2);
+  });
+});
+
+describe('getReviewWords', () => {
+  test('returns words matching given ids', () => {
+    const allWords = getAllWords();
+    const first = allWords[0];
+    const second = allWords[1];
+    const result = getReviewWords([first.id, second.id]);
+    expect(result).toHaveLength(2);
+    expect(result.map(w => w.id)).toContain(first.id);
+    expect(result.map(w => w.id)).toContain(second.id);
+  });
+
+  test('returns empty array for empty input', () => {
+    expect(getReviewWords([])).toEqual([]);
+  });
+
+  test('ignores unknown ids', () => {
+    expect(getReviewWords(['does-not-exist'])).toEqual([]);
   });
 });

@@ -52,3 +52,8 @@ export function getWordCountByType(): Record<string, number> {
     return acc;
   }, {});
 }
+
+export function getReviewWords(reviewIds: string[]): Word[] {
+  const idSet = new Set(reviewIds);
+  return words.filter(w => idSet.has(w.id));
+}
