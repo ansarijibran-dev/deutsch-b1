@@ -8,7 +8,7 @@ import { useTheme } from '../hooks/useTheme';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH - 48;
-const CARD_HEIGHT = 480;
+const CARD_HEIGHT = 370;
 
 interface Props {
   word: Word;
@@ -44,9 +44,7 @@ export function FlashCard({
   const frontRotation = rotation.interpolate({ inputRange: [0, 180], outputRange: ['0deg', '180deg'] });
   const backRotation = rotation.interpolate({ inputRange: [0, 180], outputRange: ['180deg', '360deg'] });
 
-  const frontText = mode === 'de-en'
-    ? `${word.article ? word.article + ' ' : ''}${word.german}`
-    : word.english;
+  const frontText = mode === 'de-en' ? word.german : word.english;
 
   const gender = word.article ? ARTICLE_GENDER[word.article] : null;
   const cardBg = gender ? c.genderColors[gender] : c.card;
@@ -65,6 +63,13 @@ export function FlashCard({
         <View style={styles.container}>
           {/* FRONT */}
           <Animated.View style={[styles.card, styles.front, { transform: [{ rotateY: frontRotation }], backfaceVisibility: 'hidden' }, { backgroundColor: c.card }]}>
+            {mode === 'de-en' && word.article && gender && (
+              <View style={[styles.articleBadge, { backgroundColor: c.genderColors[gender] }]}>
+                <Text style={[styles.articleText, { color: c.genderTextColors[gender] }]}>
+                  {word.article.toUpperCase()}
+                </Text>
+              </View>
+            )}
             <Text style={[styles.mainWord, { color: c.text1 }]}>{frontText}</Text>
             <TouchableOpacity style={styles.skipBtn} onPress={onSkip} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
               <Text style={[styles.skipText, { color: c.textMuted }]}>Skip →</Text>
@@ -163,6 +168,13 @@ const styles = StyleSheet.create({
   },
   front: { justifyContent: 'center', alignItems: 'center' },
   back: {},
+  articleBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  articleText: { fontSize: 14, fontWeight: '800', letterSpacing: 1 },
   mainWord: { fontSize: 30, fontWeight: '700', textAlign: 'center' },
   skipBtn: { position: 'absolute', bottom: 16, right: 16 },
   skipText: { fontSize: 13, fontWeight: '500' },

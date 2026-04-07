@@ -57,3 +57,7 @@ export function getReviewWords(reviewIds: string[]): Word[] {
   const idSet = new Set(reviewIds);
   return words.filter(w => idSet.has(w.id));
 }
+
+export function getWordsByDifficulty(difficulty: string): Word[] {
+  return words.filter(w => w.difficulty === difficulty);
+}

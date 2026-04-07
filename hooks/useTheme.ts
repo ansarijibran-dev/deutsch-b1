@@ -1,4 +1,4 @@
-import { useColorScheme } from 'react-native';
+import { useThemeScheme } from '../context/ThemeContext';
 
 const light = {
   screen:           '#F1F5F9',
@@ -28,11 +28,24 @@ const light = {
   passBg:           '#DCFCE7',
   judgeText:        '#374151',
   pluralText:       '#374151',
+  navBg:            '#0D1B3E',
   genderColors: {
     masculine: '#C7D2FE',
     feminine:  '#FBCFE8',
     neuter:    '#FEF3C7',
     null:      '#FFFFFF',
+  } as Record<string, string>,
+  genderTextColors: {
+    masculine: '#1D4ED8',
+    feminine:  '#9D174D',
+    neuter:    '#92400E',
+    null:      '#374151',
+  } as Record<string, string>,
+  genderBorderColors: {
+    masculine: '#A5B4FC',
+    feminine:  '#F9A8D4',
+    neuter:    '#FDE68A',
+    null:      '#E5E7EB',
   } as Record<string, string>,
 };
 
@@ -64,17 +77,30 @@ const dark = {
   passBg:           '#052E16',
   judgeText:        '#F1F5F9',
   pluralText:       '#F1F5F9',
+  navBg:            '#060E1F',
   genderColors: {
     masculine: '#1E3A5F',
     feminine:  '#6D1A3E',
     neuter:    '#6B3A0E',
     null:      '#1E293B',
   } as Record<string, string>,
+  genderTextColors: {
+    masculine: '#93C5FD',
+    feminine:  '#FDA4AF',
+    neuter:    '#FCD34D',
+    null:      '#CBD5E1',
+  } as Record<string, string>,
+  genderBorderColors: {
+    masculine: '#1E40AF',
+    feminine:  '#9F1239',
+    neuter:    '#92400E',
+    null:      '#334155',
+  } as Record<string, string>,
 };
 
 export type Theme = typeof light;
 
 export function useTheme(): Theme {
-  const scheme = useColorScheme();
-  return scheme === 'dark' ? dark : light;
+  const { isDark } = useThemeScheme();
+  return isDark ? dark : light;
 }

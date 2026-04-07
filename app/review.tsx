@@ -6,7 +6,17 @@ import { useRouter } from 'expo-router';
 import { useProgress } from '../hooks/useProgress';
 import { useTheme } from '../hooks/useTheme';
 import { getReviewWords } from '../data/loader';
-import { WORD_TYPE_LABELS, ARTICLE_GENDER } from '../data/types';
+import { WORD_TYPE_LABELS, ARTICLE_GENDER, WordType } from '../data/types';
+
+const TYPE_BAR_COLORS: Record<WordType | 'other', string> = {
+  noun:        '#A5B4FC',
+  verb:        '#86EFAC',
+  adjective:   '#FDE68A',
+  adverb:      '#C4B5FD',
+  preposition: '#F9A8D4',
+  conjunction: '#FED7AA',
+  other:       '#E5E7EB',
+};
 
 export default function ReviewScreen() {
   const router = useRouter();
@@ -37,12 +47,15 @@ export default function ReviewScreen() {
             contentContainerStyle={styles.list}
             renderItem={({ item }) => {
               const gender = item.article ? ARTICLE_GENDER[item.article] : null;
-              const bg = gender ? c.genderColors[gender] : c.rowBg;
+              const barColor = gender
+                ? c.genderColors[gender]
+                : TYPE_BAR_COLORS[item.wordType] ?? TYPE_BAR_COLORS.other;
               return (
                 <TouchableOpacity
-                  style={[styles.wordRow, { backgroundColor: bg }]}
+                  style={[styles.wordRow, { backgroundColor: c.card, borderColor: c.border }]}
                   onPress={() => router.push(`/details/${item.id}`)}
                 >
+                  <View style={[styles.colorBar, { backgroundColor: barColor }]} />
                   <View style={styles.wordInfo}>
                     <Text style={[styles.german, { color: c.text1 }]}>
                       {item.article ? `${item.article} ` : ''}{item.german}
@@ -50,8 +63,8 @@ export default function ReviewScreen() {
                     <Text style={[styles.english, { color: c.text3 }]}>{item.english}</Text>
                   </View>
                   <View style={styles.rowRight}>
-                    <View style={[styles.typeBadge, { backgroundColor: 'rgba(255,255,255,0.15)' }]}>
-                      <Text style={[styles.typeBadgeText, { color: c.text2 }]}>{WORD_TYPE_LABELS[item.wordType]}</Text>
+                    <View style={[styles.typeBadge, { backgroundColor: c.accentLight }]}>
+                      <Text style={[styles.typeBadgeText, { color: c.accentLightText }]}>{WORD_TYPE_LABELS[item.wordType]}</Text>
                     </View>
                     <TouchableOpacity
                       onPress={() => removeFromReview(item.id)}
@@ -96,15 +109,21 @@ const styles = StyleSheet.create({
   list: { padding: 16, gap: 10 },
   wordRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 14,
     borderRadius: 12,
+    borderWidth: 1,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    elevation: 1,
   },
-  wordInfo: { flex: 1 },
+  colorBar: { width: 4, alignSelf: 'stretch' },
+  wordInfo: { flex: 1, paddingVertical: 14, paddingLeft: 12, paddingRight: 4 },
   german: { fontSize: 16, fontWeight: '700' },
   english: { fontSize: 13, marginTop: 2 },
-  rowRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  rowRight: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingRight: 14 },
   typeBadge: {
     paddingHorizontal: 8,
     paddingVertical: 3,

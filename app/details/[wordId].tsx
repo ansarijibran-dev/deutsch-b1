@@ -27,7 +27,8 @@ export default function DetailsScreen() {
   }
 
   const gender = word.article ? ARTICLE_GENDER[word.article] : null;
-  const screenBg = gender ? c.genderColors[gender] : c.screen;
+  const heroBg = gender ? c.genderColors[gender] : c.card;
+  const heroBorder = gender ? c.genderBorderColors[gender] : c.border;
   const inReview = isInReview(word.id);
 
   const handleReviewToggle = async () => {
@@ -40,8 +41,8 @@ export default function DetailsScreen() {
     : [];
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: screenBg }]}>
-      <View style={styles.header}>
+    <SafeAreaView style={[styles.container, { backgroundColor: c.screen }]}>
+      <View style={[styles.header, { borderBottomColor: c.border }]}>
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={[styles.back, { color: c.accent }]}>‹ Back</Text>
         </TouchableOpacity>
@@ -55,64 +56,62 @@ export default function DetailsScreen() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={styles.content}>
-        {/* Word badge */}
-        <View style={styles.badgeRow}>
-          <View style={[styles.badge, { backgroundColor: c.card }]}>
-            <Text style={[styles.badgeText, { color: c.text2 }]}>{WORD_TYPE_LABELS[word.wordType]}</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* ── Hero card ── */}
+        <View style={[styles.wordHero, { backgroundColor: heroBg, borderColor: heroBorder }]}>
+          <View style={styles.badgeRow}>
+            <View style={[styles.badge, { backgroundColor: c.card }]}>
+              <Text style={[styles.badgeText, { color: c.text2 }]}>{WORD_TYPE_LABELS[word.wordType]}</Text>
+            </View>
+            {gender && (
+              <View style={[styles.badge, { backgroundColor: c.card }]}>
+                <Text style={[styles.badgeText, { color: c.text2 }]}>{gender}</Text>
+              </View>
+            )}
+            {word.wordType === 'verb' && word.nounForm && (
+              <View style={[styles.badge, { backgroundColor: c.card }]}>
+                <Text style={[styles.badgeText, { color: c.text2 }]}>{word.nounForm}</Text>
+              </View>
+            )}
           </View>
-          {gender && (
-            <View style={[styles.badge, { backgroundColor: c.card }]}>
-              <Text style={[styles.badgeText, { color: c.text2 }]}>{gender}</Text>
-            </View>
-          )}
-          {word.wordType === 'verb' && word.nounForm && (
-            <View style={[styles.badge, { backgroundColor: c.card }]}>
-              <Text style={[styles.badgeText, { color: c.text2 }]}>{word.nounForm}</Text>
-            </View>
+          <Text style={[styles.german, { color: c.text1 }]}>
+            {word.article ? `${word.article} ` : ''}{word.german}
+          </Text>
+          <Text style={[styles.english, { color: c.text2 }]}>{word.english}</Text>
+          {word.plural && (
+            <Text style={[styles.plural, { color: c.pluralText }]}>Plural: {word.plural}</Text>
           )}
         </View>
 
-        {/* Main word */}
-        <Text style={[styles.german, { color: c.text1 }]}>
-          {word.article ? `${word.article} ` : ''}{word.german}
-        </Text>
-        <Text style={[styles.english, { color: c.text2 }]}>{word.english}</Text>
-
-        {/* Plural */}
-        {word.plural && (
-          <Text style={[styles.plural, { color: c.pluralText }]}>Plural: {word.plural}</Text>
-        )}
-
-        {/* Sentences */}
-        <Text style={[styles.sectionHeading, { color: c.text2 }]}>Example Sentences</Text>
+        {/* ── Example Sentences ── */}
+        <Text style={[styles.sectionHeading, { color: c.text3 }]}>Example Sentences</Text>
         {word.wordType === 'noun' ? (
           <>
             {word.sentences.nominative && (
-              <SentenceRow label="Nominative" pair={word.sentences.nominative} c={c} />
+              <SentenceCard label="Nominative" pair={word.sentences.nominative} c={c} />
             )}
             {word.sentences.accusative && (
-              <SentenceRow label="Accusative" pair={word.sentences.accusative} c={c} />
+              <SentenceCard label="Accusative" pair={word.sentences.accusative} c={c} />
             )}
             {word.sentences.dative && (
-              <SentenceRow label="Dative" pair={word.sentences.dative} c={c} />
+              <SentenceCard label="Dative" pair={word.sentences.dative} c={c} />
             )}
             {word.sentences.genitive && (
-              <SentenceRow label="Genitive" pair={word.sentences.genitive} c={c} />
+              <SentenceCard label="Genitive" pair={word.sentences.genitive} c={c} />
             )}
           </>
         ) : (
           <>
-            <SentenceRow label="Present" pair={word.sentences.present} c={c} />
-            {word.sentences.past && <SentenceRow label="Past" pair={word.sentences.past} c={c} />}
-            {word.sentences.future && <SentenceRow label="Future" pair={word.sentences.future} c={c} />}
+            <SentenceCard label="Present" pair={word.sentences.present} c={c} />
+            {word.sentences.past && <SentenceCard label="Past" pair={word.sentences.past} c={c} />}
+            {word.sentences.future && <SentenceCard label="Future" pair={word.sentences.future} c={c} />}
           </>
         )}
 
-        {/* Tense tables (verbs only) */}
+        {/* ── Conjugation Tables (verbs) ── */}
         {word.tenses && (
           <>
-            <Text style={[styles.sectionHeading, { color: c.text2 }]}>Conjugation Tables</Text>
+            <Text style={[styles.sectionHeading, { color: c.text3 }]}>Conjugation Tables</Text>
             {tenseKeys.map(tenseKey => (
               <TenseTable
                 key={tenseKey}
@@ -122,19 +121,21 @@ export default function DetailsScreen() {
             ))}
           </>
         )}
+
+        <View style={{ height: 40 }} />
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-function SentenceRow({
+function SentenceCard({
   label, pair, c,
 }: { label: string; pair: { de: string; en: string }; c: ReturnType<typeof useTheme> }) {
   return (
-    <View style={styles.sentenceRow}>
-      <Text style={[styles.sentenceLabel, { color: c.textMuted }]}>{label}</Text>
-      <Text style={[styles.sentenceDe, { color: c.text1 }]}>{pair.de}</Text>
-      <Text style={[styles.sentenceEn, { color: c.text3 }]}>{pair.en}</Text>
+    <View style={[styles.sentCard, { backgroundColor: c.card, borderColor: c.border }]}>
+      <Text style={[styles.sentLabel, { color: c.text3 }]}>{label}</Text>
+      <Text style={[styles.sentDe, { color: c.text1 }]}>{pair.de}</Text>
+      <Text style={[styles.sentEn, { color: c.text2 }]}>{pair.en}</Text>
     </View>
   );
 }
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   back: { fontSize: 17 },
   reviewBtn: {
@@ -156,33 +158,57 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   reviewBtnText: { fontSize: 13, fontWeight: '600' },
-  content: { paddingHorizontal: 20, paddingBottom: 40 },
-  badgeRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
-  badge: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 6,
+
+  // Hero card
+  wordHero: {
+    margin: 16,
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
   },
+  badgeRow: { flexDirection: 'row', gap: 8, marginBottom: 10, flexWrap: 'wrap' },
+  badge: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6 },
   badgeText: { fontSize: 12, fontWeight: '600' },
-  german: { fontSize: 30, fontWeight: '700', marginBottom: 4 },
+  german: { fontSize: 30, fontWeight: '700', marginBottom: 4, letterSpacing: -0.3 },
   english: { fontSize: 18, marginBottom: 4 },
-  plural: { fontSize: 14, marginBottom: 16 },
+  plural: { fontSize: 14 },
+
+  // Section heading
   sectionHeading: {
-    fontSize: 12,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  sentenceRow: { marginBottom: 14 },
-  sentenceLabel: {
     fontSize: 11,
     fontWeight: '700',
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 2,
+    letterSpacing: 0.8,
+    marginTop: 4,
+    marginBottom: 8,
+    marginHorizontal: 16,
   },
-  sentenceDe: { fontSize: 14 },
-  sentenceEn: { fontSize: 13, fontStyle: 'italic', marginTop: 2 },
+
+  // Sentence cards
+  sentCard: {
+    marginHorizontal: 16,
+    marginBottom: 8,
+    borderRadius: 14,
+    padding: 14,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    elevation: 1,
+  },
+  sentLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: 5,
+  },
+  sentDe: { fontSize: 14, fontWeight: '600', lineHeight: 20, marginBottom: 3 },
+  sentEn: { fontSize: 13, fontStyle: 'italic', lineHeight: 18 },
 });

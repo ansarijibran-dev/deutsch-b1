@@ -7,7 +7,7 @@ import { FlashCard } from '../../components/FlashCard';
 import { useStudySession } from '../../hooks/useStudySession';
 import { useProgress } from '../../hooks/useProgress';
 import { useTheme } from '../../hooks/useTheme';
-import { getAllWords, getWordsByTheme, getWordsByType } from '../../data/loader';
+import { getAllWords, getWordsByTheme, getWordsByType, getWordsByDifficulty } from '../../data/loader';
 import { Theme, WordType } from '../../data/types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -27,6 +27,7 @@ function resolveDeckIds(deckId: string, reviewIds: string[]): string[] {
   if (deckId === 'review') return reviewIds;
   if (deckId.startsWith('theme:')) return getWordsByTheme(deckId.slice(6) as Theme).map(w => w.id);
   if (deckId.startsWith('type:')) return getWordsByType(deckId.slice(5) as WordType).map(w => w.id);
+  if (deckId.startsWith('difficulty:')) return getWordsByDifficulty(deckId.slice(11)).map(w => w.id);
   return [];
 }
 

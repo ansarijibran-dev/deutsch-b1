@@ -5,8 +5,18 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { searchWords } from '../data/loader';
-import { Word, ARTICLE_GENDER } from '../data/types';
+import { Word, ARTICLE_GENDER, WordType } from '../data/types';
 import { useTheme } from '../hooks/useTheme';
+
+const TYPE_DOT_COLORS: Record<WordType | 'other', string> = {
+  noun:        '#A5B4FC',
+  verb:        '#86EFAC',
+  adjective:   '#FDE68A',
+  adverb:      '#C4B5FD',
+  preposition: '#F9A8D4',
+  conjunction: '#FED7AA',
+  other:       '#E5E7EB',
+};
 
 interface Props {
   onClose: () => void;
@@ -52,13 +62,21 @@ export function SearchOverlay({ onClose }: Props) {
           contentContainerStyle={styles.list}
           renderItem={({ item }) => {
             const gender = item.article ? ARTICLE_GENDER[item.article] : null;
-            const bg = gender ? c.genderColors[gender] : c.rowBg;
+            const dotColor = gender
+              ? c.genderColors[gender]
+              : TYPE_DOT_COLORS[item.wordType] ?? TYPE_DOT_COLORS.other;
             return (
-              <TouchableOpacity style={[styles.result, { backgroundColor: bg }]} onPress={() => handleSelect(item)}>
-                <Text style={[styles.german, { color: c.text1 }]}>
-                  {item.article ? `${item.article} ` : ''}{item.german}
-                </Text>
-                <Text style={[styles.english, { color: c.text3 }]}>{item.english}</Text>
+              <TouchableOpacity
+                style={[styles.result, { backgroundColor: c.card, borderColor: c.border }]}
+                onPress={() => handleSelect(item)}
+              >
+                <View style={[styles.dot, { backgroundColor: dotColor }]} />
+                <View style={styles.resultText}>
+                  <Text style={[styles.german, { color: c.text1 }]}>
+                    {item.article ? `${item.article} ` : ''}{item.german}
+                  </Text>
+                  <Text style={[styles.english, { color: c.text3 }]}>{item.english}</Text>
+                </View>
               </TouchableOpacity>
             );
           }}
@@ -95,9 +113,25 @@ const styles = StyleSheet.create({
   },
   list: { paddingHorizontal: 16, paddingTop: 8, gap: 8 },
   result: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 14,
-    borderRadius: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    elevation: 1,
+    gap: 12,
   },
+  dot: {
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+    flexShrink: 0,
+  },
+  resultText: { flex: 1 },
   german: { fontSize: 16, fontWeight: '700' },
   english: { fontSize: 13, marginTop: 2 },
   noResults: { padding: 24, alignItems: 'center' },
