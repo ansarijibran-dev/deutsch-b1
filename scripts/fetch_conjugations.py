@@ -8,38 +8,51 @@ Run from the repo root directory.
 """
 
 import json
-import re
 import time
 import sys
 from pathlib import Path
 
 import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from bs4 import BeautifulSoup
 
 VOCAB_PATH = Path("assets/data/vocabulary.json")
 HEADERS = {"User-Agent": "VelocitrainerApp/2.0 (educational; contact: github.com/ansarijibran-dev/deutsch-b1)"}
 
+# Order matters: check "Futur II" before "Futur I" to avoid substring match
 TENSE_SECTION_LABELS = {
-    "Präsens":            "present",
-    "Präteritum":         "simple_past",
-    "Perfekt":            "present_perfect",
-    "Plusquamperfekt":    "past_perfect",
-    "Futur I":            "future",
-    "Futur II":           "future_perfect",
+    "Präsens":         "present",
+    "Präteritum":      "simple_past",
+    "Perfekt":         "present_perfect",
+    "Plusquamperfekt": "past_perfect",
+    "Futur II":        "future_perfect",
+    "Futur I":         "future",
 }
 
-PERSON_LABELS = ["ich", "du", "er", "wir", "ihr", "sie"]
+# Maps de.wiktionary "N. Person Singular/Plural" labels to our person keys
+PERSON_MAP = {
+    "1. Person Singular": "ich",
+    "2. Person Singular": "du",
+    "3. Person Singular": "er",
+    "1. Person Plural":   "wir",
+    "2. Person Plural":   "ihr",
+    "3. Person Plural":   "sie",
+}
+
+# Pronoun prefixes to strip from the Aktiv Indikativ cell text
+PRONOUN_PREFIXES = ["ich ", "du ", "er/sie/es ", "wir ", "ihr ", "sie ", "Sie "]
 
 
-def clean_form(text: str) -> str:
-    """Strip auxiliary hints like 'habe' → keep only the conjugated form."""
-    text = re.sub(r'\[.*?\]', '', text)   # remove bracketed notes
-    text = re.sub(r'\(.*?\)', '', text)   # remove parenthetical notes
-    return text.strip()
+def strip_pronoun(text: str) -> str:
+    for prefix in PRONOUN_PREFIXES:
+        if text.startswith(prefix):
+            return text[len(prefix):]
+    return text
 
 
 def fetch_flexion_page(verb: str) -> BeautifulSoup | None:
-    url = f"https://de.wiktionary.org/w/api.php"
+    url = "https://de.wiktionary.org/w/api.php"
     params = {
         "action": "parse",
         "page": f"Flexion:{verb}",
@@ -47,7 +60,7 @@ def fetch_flexion_page(verb: str) -> BeautifulSoup | None:
         "format": "json",
     }
     try:
-        resp = requests.get(url, params=params, headers=HEADERS, timeout=10)
+        resp = requests.get(url, params=params, headers=HEADERS, timeout=10, verify=False)
         resp.raise_for_status()
         data = resp.json()
         html = data.get("parse", {}).get("text", {}).get("*", "")
@@ -61,66 +74,50 @@ def fetch_flexion_page(verb: str) -> BeautifulSoup | None:
 
 def parse_tenses(soup: BeautifulSoup) -> dict | None:
     """
-    Extract the 6 tenses × 6 persons from the Flexion page.
-    de.wiktionary Flexion tables have one table per tense with rows:
-      ich / du / er·sie·es / wir / ihr / sie·Sie
-    Returns a dict keyed by our tense names, each a dict of 6 persons.
+    Extract 6 tenses × 6 persons from the Flexion page.
+
+    de.wiktionary structure: wikitables contain tense blocks separated by
+    single-cell rows naming the tense (e.g. "Präsens", "Präteritum").
+    Person rows are labeled "N. Person Singular/Plural".
+    We extract the Aktiv Indikativ column (cells[1]) and strip the pronoun prefix.
     """
     tenses: dict[str, dict[str, str]] = {}
 
-    # Each tense is in its own wikitable. The heading above it names the tense.
-    tables = soup.find_all("table", class_="wikitable")
+    # Some verbs use class="wikitable", separable verbs use plain tables — check both
+    tables = soup.find_all("table", class_="wikitable") or soup.find_all("table")
     for table in tables:
-        # Find the heading that precedes this table
-        prev = table.find_previous(["h3", "h4", "b", "th"])
-        heading_text = ""
-        caption = table.find("caption")
-        if caption:
-            heading_text = caption.get_text(strip=True)
-        if not heading_text and prev:
-            heading_text = prev.get_text(strip=True)
-
-        tense_key = None
-        for label, key in TENSE_SECTION_LABELS.items():
-            if label in heading_text:
-                tense_key = key
-                break
-        if tense_key is None:
-            continue
-
         rows = table.find_all("tr")
-        persons_found: dict[str, str] = {}
+        current_tense_key: str | None = None
+
         for row in rows:
             cells = row.find_all(["td", "th"])
-            if len(cells) < 2:
+            if not cells:
                 continue
-            person_cell = cells[0].get_text(strip=True).lower()
-            form_cell = cells[1].get_text(" ", strip=True)
-            form = clean_form(form_cell)
-            if not form:
+
+            first_text = cells[0].get_text(separator=" ", strip=True)
+
+            # Single-cell row → potential tense header
+            if len(cells) == 1:
+                for label, key in TENSE_SECTION_LABELS.items():
+                    if label in first_text:
+                        current_tense_key = key
+                        if key not in tenses:
+                            tenses[key] = {}
+                        break
                 continue
-            # Map German person label to our key.
-            # de.wiktionary rows: ich | du | er/sie/es | wir | ihr | sie/Sie
-            # We match greedily — "er" row always starts with "er",
-            # "sie/Sie" (3rd plural) only matches after "wir" and "ihr" are set.
-            if person_cell.startswith("ich"):
-                persons_found["ich"] = form
-            elif person_cell.startswith("du"):
-                persons_found["du"] = form
-            elif person_cell.startswith("er"):          # "er/sie/es"
-                persons_found["er"] = form
-            elif person_cell.startswith("wir"):
-                persons_found["wir"] = form
-            elif person_cell.startswith("ihr"):
-                persons_found["ihr"] = form
-            elif "sie" in person_cell:                  # "sie/Sie" (3rd plural)
-                if "sie" not in persons_found:
-                    persons_found["sie"] = form
 
-        if len(persons_found) == 6:
-            tenses[tense_key] = persons_found
+            # Person data row
+            if current_tense_key and first_text in PERSON_MAP:
+                person_key = PERSON_MAP[first_text]
+                form_text = cells[1].get_text(separator=" ", strip=True)
+                form = strip_pronoun(form_text).strip()
+                if form:
+                    tenses[current_tense_key][person_key] = form
 
-    return tenses if len(tenses) == 6 else None
+    # Validate: exactly 6 tenses, each with 6 persons
+    if len(tenses) == 6 and all(len(v) == 6 for v in tenses.values()):
+        return tenses
+    return None
 
 
 def main():
@@ -158,7 +155,6 @@ def main():
             time.sleep(0.5)
             continue
 
-        # Update the word in the full vocab list
         for w in vocab:
             if w["id"] == word_id:
                 w["tenses"] = tenses
@@ -170,7 +166,7 @@ def main():
 
     print(f"\nDone: {success} succeeded, {len(failed)} failed.")
     if failed:
-        print("Failed verbs (add manually):")
+        print("Failed verbs (add manually or will show empty in UI):")
         for v in failed:
             print(f"  {v}")
 

@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 
 import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 VOCAB_PATH = Path("assets/data/vocabulary.json")
 IMAGES_DIR = Path("assets/images/nouns")
@@ -35,7 +37,7 @@ def search_wikipedia_image(german_word: str) -> str | None:
         "pilicense": "any",
     }
     try:
-        resp = requests.get(api, params=params, headers=HEADERS, timeout=10)
+        resp = requests.get(api, params=params, headers=HEADERS, timeout=10, verify=False)
         resp.raise_for_status()
         pages = resp.json().get("query", {}).get("pages", {})
         for page in pages.values():
@@ -48,7 +50,7 @@ def search_wikipedia_image(german_word: str) -> str | None:
 
 def download_image(url: str, dest: Path) -> bool:
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=15)
+        resp = requests.get(url, headers=HEADERS, timeout=15, verify=False)
         resp.raise_for_status()
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(resp.content)
