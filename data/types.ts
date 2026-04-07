@@ -34,21 +34,37 @@ export interface Sentences {
   present: SentencePair;
   past: SentencePair;
   future: SentencePair;
-  // Nouns: nominative/accusative/dative case examples
   nominative?: SentencePair;
   accusative?: SentencePair;
   dative?: SentencePair;
-  // Non-nouns: extra usage examples in place of case sentences
   usage1?: SentencePair;
   usage2?: SentencePair;
   usage3?: SentencePair;
 }
 
+export interface TenseConjugation {
+  ich: string;
+  du: string;
+  er: string;   // represents er/sie/es
+  wir: string;
+  ihr: string;
+  sie: string;  // represents sie/Sie
+}
+
+export interface TenseForms {
+  present: TenseConjugation;
+  simple_past: TenseConjugation;
+  present_perfect: TenseConjugation;
+  past_perfect: TenseConjugation;
+  future: TenseConjugation;
+  future_perfect: TenseConjugation;
+}
+
 export interface VerbForms {
-  present_3sg: string;   // e.g. "arbeitet"
-  simple_past: string;   // e.g. "arbeitete"
-  perfect: string;       // e.g. "hat gearbeitet"
-  future: string;        // e.g. "wird arbeiten"
+  present_3sg: string;
+  simple_past: string;
+  perfect: string;
+  future: string;
 }
 
 export interface Word {
@@ -57,17 +73,35 @@ export interface Word {
   article: 'der' | 'die' | 'das' | null;
   english: string;
   wordType: WordType;
-  plural: string | null;      // full plural form e.g. "die Abfälle"
+  plural: string | null;
   theme: Theme;
-  verbForms?: VerbForms;
+  image?: string;        // relative path e.g. "assets/images/nouns/hund_001.jpg"
+  verbForms?: VerbForms; // legacy — kept for backward compat
+  tenses?: TenseForms;   // full conjugation table for verbs
   sentences: Sentences;
 }
 
 export interface StudyProgress {
   knownIds: string[];
   unknownIds: string[];
-  deckPositions: Record<string, number>;  // deckId → last card index
+  reviewIds: string[];
+  deckPositions: Record<string, number>;
+  languageMode: 'de-en' | 'en-de';
 }
+
+export type Gender = 'masculine' | 'feminine' | 'neuter' | null;
+
+export const ARTICLE_GENDER: Record<string, Gender> = {
+  der: 'masculine',
+  die: 'feminine',
+  das: 'neuter',
+};
+
+export const GENDER_COLORS: Record<string, string> = {
+  masculine: '#DBEAFE',   // blue-100
+  feminine:  '#FCE7F3',   // pink-100
+  neuter:    '#FEF9C3',   // yellow-100
+};
 
 export const THEME_LABELS: Record<Theme, string> = {
   daily_life: 'Daily Life',
@@ -97,11 +131,20 @@ export const WORD_TYPE_LABELS: Record<WordType, string> = {
 };
 
 export const WORD_TYPE_COLORS: Record<WordType, string> = {
-  noun: '#DBEAFE',       // blue-100
-  verb: '#DCFCE7',       // green-100
-  adjective: '#FEF9C3',  // yellow-100
-  adverb: '#EDE9FE',     // violet-100
-  preposition: '#FCE7F3',// pink-100
-  conjunction: '#FFE4E6',// rose-100
-  other: '#F3F4F6',      // gray-100
+  noun: '#DBEAFE',
+  verb: '#DCFCE7',
+  adjective: '#FEF9C3',
+  adverb: '#EDE9FE',
+  preposition: '#FCE7F3',
+  conjunction: '#FFE4E6',
+  other: '#F3F4F6',
+};
+
+export const TENSE_LABELS: Record<keyof TenseForms, string> = {
+  present: 'Präsens (Present)',
+  simple_past: 'Präteritum (Simple Past)',
+  present_perfect: 'Perfekt (Present Perfect)',
+  past_perfect: 'Plusquamperfekt (Past Perfect)',
+  future: 'Futur I (Future)',
+  future_perfect: 'Futur II (Future Perfect)',
 };
