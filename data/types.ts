@@ -39,6 +39,7 @@ export interface Sentences {
   nominative?: SentencePair;
   accusative?: SentencePair;
   dative?: SentencePair;
+  genitive?: SentencePair;
   usage1?: SentencePair;
   usage2?: SentencePair;
   usage3?: SentencePair;

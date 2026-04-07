@@ -97,6 +97,9 @@ export default function DetailsScreen() {
             {word.sentences.dative && (
               <SentenceRow label="Dative" pair={word.sentences.dative} c={c} />
             )}
+            {word.sentences.genitive && (
+              <SentenceRow label="Genitive" pair={word.sentences.genitive} c={c} />
+            )}
           </>
         ) : (
           <>
