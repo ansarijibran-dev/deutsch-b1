@@ -5,7 +5,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Word } from '../data/types';
 import { WordBadge } from './WordBadge';
-import { SentenceSection } from './SentenceSection';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH - 48;
@@ -78,7 +77,16 @@ export function FlashCard({ word, mode, onFlipped }: Props) {
                 <Text style={styles.verbRow}><Text style={styles.verbLabel}>Perfect: </Text>{word.verbForms.perfect}</Text>
               </View>
             )}
-            <SentenceSection sentences={word.sentences} isNoun={isNoun} />
+            {word.sentences && (
+              <View style={styles.sentences}>
+                {Object.values(word.sentences).filter(Boolean).map((s, i) => (
+                  <View key={i} style={styles.sentenceRow}>
+                    <Text style={styles.sentenceDe}>{s.de}</Text>
+                    <Text style={styles.sentenceEn}>{s.en}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
           </ScrollView>
         </Animated.View>
       </View>
@@ -108,4 +116,8 @@ const styles = StyleSheet.create({
   verbTableTitle: { fontSize: 11, fontWeight: '700', color: '#374151', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 },
   verbRow: { fontSize: 14, color: '#374151', marginBottom: 2 },
   verbLabel: { fontWeight: '600' },
+  sentences: { marginTop: 12 },
+  sentenceRow: { marginBottom: 6 },
+  sentenceDe: { fontSize: 13, color: '#374151', fontStyle: 'italic' },
+  sentenceEn: { fontSize: 12, color: '#9CA3AF' },
 });

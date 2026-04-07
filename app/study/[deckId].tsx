@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { FlashCard } from '../../components/FlashCard';
-import { ProgressBar } from '../../components/ProgressBar';
 import { useStudySession } from '../../hooks/useStudySession';
 import { useProgress } from '../../hooks/useProgress';
 import { getAllWords, getWordsByTheme, getWordsByType, getWeakWords } from '../../data/loader';
@@ -87,7 +86,9 @@ export default function StudyScreen() {
           <Text style={styles.modeText}>{mode === 'de-en' ? 'DE → EN' : 'EN → DE'}</Text>
         </TouchableOpacity>
       </View>
-      <ProgressBar fraction={progressFraction} />
+      <View style={styles.progressTrack}>
+        <View style={[styles.progressFill, { width: `${progressFraction * 100}%` as any }]} />
+      </View>
       <View style={styles.cardArea}>
         <RNAnimated.View style={{ transform: [{ translateX }] }} {...panResponder.panHandlers}>
           {currentWord && <FlashCard word={currentWord} mode={mode} onFlipped={setCardFlipped} />}
@@ -122,6 +123,8 @@ const styles = StyleSheet.create({
   unknownButton: { backgroundColor: '#FEE2E2' },
   knownButton: { backgroundColor: '#DCFCE7' },
   actionText: { fontSize: 15, fontWeight: '600', color: '#374151' },
+  progressTrack: { height: 4, backgroundColor: '#E5E7EB', marginHorizontal: 16 },
+  progressFill: { height: 4, backgroundColor: '#003781', borderRadius: 2 },
   swipeHint: { textAlign: 'center', color: '#D1D5DB', fontSize: 13, paddingBottom: 32 },
   summary: { flex: 1, justifyContent: 'center', alignItems: 'center', gap: 12 },
   summaryEmoji: { fontSize: 56 },
