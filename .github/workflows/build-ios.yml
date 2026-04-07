@@ -22,6 +22,51 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Patch codegen — nil-safe thirdPartyFabricComponents (iOS 26 fix)
+        run: |
+          python3 - << 'PYEOF'
+          import re
+
+          # 1. Patch the JS generator to output nil-safe add() calls instead of dict literals
+          js_path = 'node_modules/react-native/scripts/codegen/generate-artifacts-executor/generateRCTThirdPartyComponents.js'
+          with open(js_path) as f:
+              src = f.read()
+
+          old = r'return `\t\t@"${componentName}": NSClassFromString(@"${className}"), // ${library}`;'
+          new = r'return `\t\t{ Class _c = NSClassFromString(@"${className}"); if (_c) map[@"${componentName}"] = _c; } // ${library}`;'
+          patched = src.replace(old, new)
+          assert patched != src, "JS patch not applied — source changed?"
+          with open(js_path, 'w') as f:
+              f.write(patched)
+          print("Patched generateRCTThirdPartyComponents.js")
+
+          # 2. Patch the .mm template to use NSMutableDictionary instead of @{} literal
+          tmpl_path = 'node_modules/react-native/scripts/codegen/templates/RCTThirdPartyComponentsProviderMM.template'
+          with open(tmpl_path) as f:
+              src = f.read()
+
+          old_block = (
+              '  dispatch_once(&nativeComponentsToken, ^{\n'
+              '    thirdPartyComponents = @{\n'
+              '{thirdPartyComponentsMapping}\n'
+              '    };\n'
+              '  });'
+          )
+          new_block = (
+              '  dispatch_once(&nativeComponentsToken, ^{\n'
+              '    NSMutableDictionary<NSString *, Class<RCTComponentViewProtocol>> *map =\n'
+              '        [NSMutableDictionary new];\n'
+              '{thirdPartyComponentsMapping}\n'
+              '    thirdPartyComponents = map;\n'
+              '  });'
+          )
+          patched = src.replace(old_block, new_block)
+          assert patched != src, "Template patch not applied — source changed?"
+          with open(tmpl_path, 'w') as f:
+              f.write(patched)
+          print("Patched RCTThirdPartyComponentsProviderMM.template")
+          PYEOF
+
       - name: Expo prebuild (generate Xcode project)
         run: npx expo prebuild --platform ios --clean
 
