@@ -2,18 +2,22 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_KEY = '@deutsch_b1_progress';
+const STORAGE_KEY = '@velocitrainer_progress';
 
 interface ProgressState {
   knownIds: string[];
   unknownIds: string[];
+  reviewIds: string[];
   deckPositions: Record<string, number>;
+  languageMode: 'de-en' | 'en-de';
 }
 
 const DEFAULT_STATE: ProgressState = {
   knownIds: [],
   unknownIds: [],
+  reviewIds: [],
   deckPositions: {},
+  languageMode: 'de-en',
 };
 
 export function useProgress() {
@@ -25,9 +29,10 @@ export function useProgress() {
     AsyncStorage.getItem(STORAGE_KEY).then(raw => {
       if (raw) {
         try {
-          const parsed = JSON.parse(raw) as ProgressState;
-          setProgress(parsed);
-          progressRef.current = parsed;
+          const parsed = JSON.parse(raw) as Partial<ProgressState>;
+          const merged: ProgressState = { ...DEFAULT_STATE, ...parsed };
+          setProgress(merged);
+          progressRef.current = merged;
         } catch {
           // corrupted data — reset
         }
@@ -42,32 +47,41 @@ export function useProgress() {
   }, []);
 
   const markKnown = useCallback(async (id: string) => {
-    const current = progressRef.current;
-    const next: ProgressState = {
-      ...current,
-      knownIds: [...new Set([...current.knownIds, id])],
-      unknownIds: current.unknownIds.filter(x => x !== id),
-    };
-    await persist(next);
+    const c = progressRef.current;
+    await persist({
+      ...c,
+      knownIds: [...new Set([...c.knownIds, id])],
+      unknownIds: c.unknownIds.filter(x => x !== id),
+    });
   }, [persist]);
 
   const markUnknown = useCallback(async (id: string) => {
-    const current = progressRef.current;
-    const next: ProgressState = {
-      ...current,
-      unknownIds: [...new Set([...current.unknownIds, id])],
-      knownIds: current.knownIds.filter(x => x !== id),
-    };
-    await persist(next);
+    const c = progressRef.current;
+    await persist({
+      ...c,
+      unknownIds: [...new Set([...c.unknownIds, id])],
+      knownIds: c.knownIds.filter(x => x !== id),
+    });
   }, [persist]);
 
+  const addToReview = useCallback(async (id: string) => {
+    const c = progressRef.current;
+    await persist({ ...c, reviewIds: [...new Set([...c.reviewIds, id])] });
+  }, [persist]);
+
+  const removeFromReview = useCallback(async (id: string) => {
+    const c = progressRef.current;
+    await persist({ ...c, reviewIds: c.reviewIds.filter(x => x !== id) });
+  }, [persist]);
+
+  const isInReview = useCallback(
+    (id: string) => progressRef.current.reviewIds.includes(id),
+    []
+  );
+
   const saveDeckPosition = useCallback(async (deckId: string, index: number) => {
-    const current = progressRef.current;
-    const next: ProgressState = {
-      ...current,
-      deckPositions: { ...current.deckPositions, [deckId]: index },
-    };
-    await persist(next);
+    const c = progressRef.current;
+    await persist({ ...c, deckPositions: { ...c.deckPositions, [deckId]: index } });
   }, [persist]);
 
   const getDeckPosition = useCallback(
@@ -75,16 +89,25 @@ export function useProgress() {
     []
   );
 
-  const totalStudied =
-    new Set([...progress.knownIds, ...progress.unknownIds]).size;
+  const setLanguageMode = useCallback(async (mode: 'de-en' | 'en-de') => {
+    await persist({ ...progressRef.current, languageMode: mode });
+  }, [persist]);
+
+  const totalStudied = new Set([...progress.knownIds, ...progress.unknownIds]).size;
 
   return {
     knownIds: progress.knownIds,
     unknownIds: progress.unknownIds,
+    reviewIds: progress.reviewIds,
+    languageMode: progress.languageMode,
     markKnown,
     markUnknown,
+    addToReview,
+    removeFromReview,
+    isInReview,
     saveDeckPosition,
     getDeckPosition,
+    setLanguageMode,
     totalStudied,
   };
 }

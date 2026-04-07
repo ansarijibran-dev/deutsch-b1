@@ -76,4 +76,46 @@ describe('useProgress', () => {
     });
     expect(result.current.totalStudied).toBe(2);
   });
+
+  test('starts with empty reviewIds', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    expect(result.current.reviewIds).toEqual([]);
+  });
+
+  test('addToReview adds id to reviewIds', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    await act(async () => { await result.current.addToReview('hund_001'); });
+    expect(result.current.reviewIds).toContain('hund_001');
+  });
+
+  test('removeFromReview removes id from reviewIds', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    await act(async () => { await result.current.addToReview('hund_001'); });
+    await act(async () => { await result.current.removeFromReview('hund_001'); });
+    expect(result.current.reviewIds).not.toContain('hund_001');
+  });
+
+  test('isInReview returns true when id is in reviewIds', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    await act(async () => { await result.current.addToReview('hund_001'); });
+    expect(result.current.isInReview('hund_001')).toBe(true);
+    expect(result.current.isInReview('other_id')).toBe(false);
+  });
+
+  test('starts with de-en language mode', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    expect(result.current.languageMode).toBe('de-en');
+  });
+
+  test('setLanguageMode updates language mode', async () => {
+    const { result } = renderHook(() => useProgress());
+    await act(async () => {});
+    await act(async () => { await result.current.setLanguageMode('en-de'); });
+    expect(result.current.languageMode).toBe('en-de');
+  });
 });
