@@ -1,16 +1,12 @@
 // hooks/useProgress.ts
 import { useState, useEffect, useCallback, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StudyProgress } from '../data/types';
 
+// Key renamed from '@deutsch_b1_progress' in v2 — v1 progress is not migrated.
 const STORAGE_KEY = '@velocitrainer_progress';
 
-interface ProgressState {
-  knownIds: string[];
-  unknownIds: string[];
-  reviewIds: string[];
-  deckPositions: Record<string, number>;
-  languageMode: 'de-en' | 'en-de';
-}
+type ProgressState = StudyProgress;
 
 const DEFAULT_STATE: ProgressState = {
   knownIds: [],
