@@ -27,6 +27,7 @@ const light = {
   failBg:           '#FEE2E2',
   passBg:           '#DCFCE7',
   judgeText:        '#374151',
+  pluralText:       '#374151',
   genderColors: {
     masculine: '#C7D2FE',
     feminine:  '#FBCFE8',
@@ -62,6 +63,7 @@ const dark = {
   failBg:           '#450A0A',
   passBg:           '#052E16',
   judgeText:        '#F1F5F9',
+  pluralText:       '#F1F5F9',
   genderColors: {
     masculine: '#1E3A5F',
     feminine:  '#6D1A3E',

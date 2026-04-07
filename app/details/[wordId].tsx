@@ -81,7 +81,7 @@ export default function DetailsScreen() {
 
         {/* Plural */}
         {word.plural && (
-          <Text style={[styles.plural, { color: c.text2 }]}>Plural: {word.plural}</Text>
+          <Text style={[styles.plural, { color: c.pluralText }]}>Plural: {word.plural}</Text>
         )}
 
         {/* Sentences */}

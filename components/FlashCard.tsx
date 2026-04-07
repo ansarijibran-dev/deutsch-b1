@@ -66,7 +66,6 @@ export function FlashCard({
           {/* FRONT */}
           <Animated.View style={[styles.card, styles.front, { transform: [{ rotateY: frontRotation }], backfaceVisibility: 'hidden' }, { backgroundColor: c.card }]}>
             <Text style={[styles.mainWord, { color: c.text1 }]}>{frontText}</Text>
-            <Text style={[styles.hint, { color: c.textMuted }]}>Tap to reveal</Text>
             <TouchableOpacity style={styles.skipBtn} onPress={onSkip} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
               <Text style={[styles.skipText, { color: c.textMuted }]}>Skip →</Text>
             </TouchableOpacity>
@@ -100,7 +99,7 @@ export function FlashCard({
 
               {/* Plural */}
               {word.plural && (
-                <Text style={[styles.plural, { color: c.text2 }]}>Plural: {word.plural}</Text>
+                <Text style={[styles.plural, { color: c.pluralText }]}>Plural: {word.plural}</Text>
               )}
 
               {/* Action buttons */}
@@ -165,7 +164,6 @@ const styles = StyleSheet.create({
   front: { justifyContent: 'center', alignItems: 'center' },
   back: {},
   mainWord: { fontSize: 30, fontWeight: '700', textAlign: 'center' },
-  hint: { fontSize: 12, marginTop: 10 },
   skipBtn: { position: 'absolute', bottom: 16, right: 16 },
   skipText: { fontSize: 13, fontWeight: '500' },
   backContent: { paddingBottom: 8 },
