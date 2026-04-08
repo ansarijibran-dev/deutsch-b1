@@ -52,11 +52,9 @@ Home → [🔍] → Search panel → select word → Details page
 │  [DE→EN]  ████░ 340/2400  🔍│  ← controls bar
 │                             │
 │  ┌─────────┐  ┌─────────┐  │
-│  │Study All│  │Randomize│  │
+│  │Randomize│  │  Review │  │
+│  │ (all)   │  │  (12)   │  │
 │  └─────────┘  └─────────┘  │
-│  ┌─────────────────────┐   │
-│  │  For Review  (12)   │   │
-│  └─────────────────────┘   │
 │                             │
 │  WORD TYPE                  │
 │  [Nouns] [Verbs] [Adverbs]  │
@@ -73,9 +71,8 @@ Home → [🔍] → Search panel → select word → Details page
 - Header bar: app name "Velocitrainer"
 - Controls bar: DE→EN / EN→DE language toggle | compact progress pill | search icon
 - Language toggle persists into study session
-- Study All: starts study session with all words from last saved position
-- Randomize: shuffles all words, starts study immediately
-- For Review tile: spans full width, shows count of saved words; tapping starts study session on that list
+- Randomize: shuffles all ~2,400 words in random order, starts study immediately
+- For Review tile: shows count of saved words; tapping starts study session on that list
 - Word Type chips: scrollable row; tapping one starts study immediately for that type
 - Thematic chips: scrollable row; tapping one starts study immediately for that theme
 - Search icon (🔍): slides in search panel overlay

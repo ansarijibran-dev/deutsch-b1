@@ -44,3 +44,16 @@ yarn-error.*
 DerivedData/
 *.ipa
 .worktrees/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data processing artifacts
+*.log
+scripts/batch_*_input.json
+scripts/batch_*_output.json
+scripts/mini_*_input.json
+scripts/mini_*_output.json
+scripts/*_checkpoint.json
